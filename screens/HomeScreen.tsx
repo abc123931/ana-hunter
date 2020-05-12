@@ -1,5 +1,6 @@
 import React from "react";
 import { StyleSheet, SafeAreaView, Text } from "react-native";
+import { Header } from "../components/Header";
 
 type RecieveProps = {};
 type ContainerCreatedProps = {};
@@ -7,6 +8,7 @@ type Props = Omit<RecieveProps & ContainerCreatedProps, "">;
 
 const Component: React.FC<Props> = ({ ..._props }) => (
   <SafeAreaView style={styles.container}>
+    <Header />
     <Text>HOME画面</Text>
   </SafeAreaView>
 );

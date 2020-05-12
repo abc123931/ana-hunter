@@ -1,11 +1,15 @@
 import React from "react";
-import { StyleSheet, SafeAreaView } from "react-native";
+import { StyleSheet, View, Text } from "react-native";
 
 type RecieveProps = {};
 type ContainerCreatedProps = {};
 type Props = Omit<RecieveProps & ContainerCreatedProps, "">;
 
-const Component: React.FC<Props> = ({ ..._props }) => <SafeAreaView style={styles.container}></SafeAreaView>;
+const Component: React.FC<Props> = ({ ..._props }) => (
+  <View style={styles.container}>
+    <Text>Hello</Text>
+  </View>
+);
 
 const styles = StyleSheet.create({
   container: {},
