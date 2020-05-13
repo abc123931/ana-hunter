@@ -2,6 +2,7 @@ import React from "react";
 import { StyleSheet, Text, FlatList } from "react-native";
 import { useGetWeekendRacesQuery, GetWeekendRacesQuery } from "../../../apollo/graphql";
 import { RaceCard } from "./RaceCard";
+import { HomeRaceCardLoading } from "../../Loading";
 
 type RecieveProps = {};
 type ContainerCreatedProps = {
@@ -24,7 +25,7 @@ const styles = StyleSheet.create({
 
 const Container: React.FC<RecieveProps> = ({ ...props }) => {
   const { data, loading, error } = useGetWeekendRacesQuery();
-  if (loading) return <Text>...Loading</Text>;
+  if (loading) return <HomeRaceCardLoading />;
   if (error) return <Text>エラーが発生しました。</Text>;
   if (!data || data?.races.length === 0) return <Text>レースが見つかりませんでした。</Text>;
   return <Component races={data.races} {...props} />;
