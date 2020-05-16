@@ -1,5 +1,6 @@
 export type HomeStackParamList = {
   Home: undefined;
+  RunningHorse: { raceName: string; raceDay: string };
 };
 
 export type BlogStackParamList = {

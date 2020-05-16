@@ -3,14 +3,19 @@ import { StyleSheet, View, Text, Image, TouchableOpacity } from "react-native";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { GetWeekendRacesQuery } from "../../../../apollo/graphql";
 import { DUMMY_IMAGE } from "../../../constants";
+import { useNavigation } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { HomeStackParamList } from "../../../../navigation/types";
 
 type RecieveProps = {
   data: GetWeekendRacesQuery["races"][number];
 };
-type ContainerCreatedProps = {};
+type ContainerCreatedProps = {
+  navigation: StackNavigationProp<HomeStackParamList, "Home">;
+};
 type Props = Omit<RecieveProps & ContainerCreatedProps, "">;
 
-const Component: React.FC<Props> = ({ data, ..._props }) => (
+const Component: React.FC<Props> = ({ data, navigation, ..._props }) => (
   <View style={styles.container}>
     <View style={styles.header}>
       <Text style={styles.raceName}>{data.raceName}</Text>
@@ -21,7 +26,15 @@ const Component: React.FC<Props> = ({ data, ..._props }) => (
     </View>
     <Image style={styles.image} source={{ uri: DUMMY_IMAGE }} />
     <View style={styles.footer}>
-      <TouchableOpacity style={styles.footerButton}>
+      <TouchableOpacity
+        style={styles.footerButton}
+        onPress={() =>
+          navigation.navigate("RunningHorse", {
+            raceName: data.raceName?.replace(/Ｇ１|Ｇ２|Ｇ３|・/gi, "") ?? "",
+            raceDay: data.raceDay ?? "",
+          })
+        }
+      >
         <FontAwesome5 name="horse" size={32} color="gray" style={styles.footerIcon} />
         <Text>出走馬</Text>
       </TouchableOpacity>
@@ -58,7 +71,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "row",
     justifyContent: "space-around",
-    paddingTop: 16,
+    paddingTop: 10,
   },
   footerButton: {
     flex: 1,
@@ -76,7 +89,8 @@ const styles = StyleSheet.create({
 });
 
 const Container: React.FC<RecieveProps> = ({ ...props }) => {
-  return <Component {...props} />;
+  const navigation = useNavigation<StackNavigationProp<HomeStackParamList, "Home">>();
+  return <Component navigation={navigation} {...props} />;
 };
 
 export default Container;
