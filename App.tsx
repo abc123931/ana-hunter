@@ -1,6 +1,9 @@
 import React from "react";
 import AppNavigator from "./navigation/AppNavigator";
 import { ApolloClient, HttpLink, InMemoryCache, ApolloProvider } from "@apollo/client";
+import dayjs from "dayjs";
+import "dayjs/locale/ja";
+dayjs.locale("ja");
 
 function createApolloClient(initialState = {}) {
   const cache = new InMemoryCache().restore(initialState);
