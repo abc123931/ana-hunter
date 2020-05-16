@@ -5,6 +5,7 @@ export type HomeStackParamList = {
 
 export type BlogStackParamList = {
   Blog: undefined;
+  BlogWeb: { uri: string };
 };
 
 export type HorseStackParamList = {
