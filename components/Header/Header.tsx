@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View, Image } from "react-native";
 
 type RecieveProps = {};
 type ContainerCreatedProps = {};
@@ -8,7 +8,8 @@ type Props = Omit<RecieveProps & ContainerCreatedProps, "">;
 const Component: React.FC<Props> = ({ ..._props }) => (
   <View style={styles.container}>
     {/* TODO: SVGが読み込めない。。*/}
-    <Text style={styles.text}>穴ハンター</Text>
+    {/* <Text style={styles.text}>穴ハンター</Text> */}
+    <Image style={styles.image} source={require("../../assets/anahunter_logo.png")} />
   </View>
 );
 
@@ -27,7 +28,8 @@ const styles = StyleSheet.create({
     fontStyle: "italic",
   },
   image: {
-    backgroundColor: "red",
+    width: 120,
+    height: "100%",
   },
 });
 
