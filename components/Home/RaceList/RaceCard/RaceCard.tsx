@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { StyleSheet, View, Text, Image, TouchableOpacity } from "react-native";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { GetWeekendRacesQuery } from "../../../../apollo/graphql";
@@ -11,11 +11,12 @@ type RecieveProps = {
   data: GetWeekendRacesQuery["races"][number];
 };
 type ContainerCreatedProps = {
-  navigation: StackNavigationProp<HomeStackParamList, "Home">;
+  onPressRunningHorse: (raceName?: string | null | undefined, raceDay?: string | null | undefined) => void;
+  onPressRace: (raceName?: string | null | undefined) => void;
 };
 type Props = Omit<RecieveProps & ContainerCreatedProps, "">;
 
-const Component: React.FC<Props> = ({ data, navigation, ..._props }) => (
+const Component: React.FC<Props> = ({ data, onPressRunningHorse, onPressRace, ..._props }) => (
   <View style={styles.container}>
     <View style={styles.header}>
       <Text style={styles.raceName}>{data.raceName}</Text>
@@ -26,19 +27,11 @@ const Component: React.FC<Props> = ({ data, navigation, ..._props }) => (
     </View>
     <Image style={styles.image} source={{ uri: DUMMY_IMAGE }} />
     <View style={styles.footer}>
-      <TouchableOpacity
-        style={styles.footerButton}
-        onPress={() =>
-          navigation.navigate("RunningHorse", {
-            raceName: data.raceName?.replace(/Ｇ１|Ｇ２|Ｇ３|・/gi, "") ?? "",
-            raceDay: data.raceDay ?? "",
-          })
-        }
-      >
+      <TouchableOpacity style={styles.footerButton} onPress={() => onPressRunningHorse(data.raceName, data.raceDay)}>
         <FontAwesome5 name="horse" size={32} color="gray" style={styles.footerIcon} />
         <Text>出走馬</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.footerButton}>
+      <TouchableOpacity style={styles.footerButton} onPress={() => onPressRace(data.raceName)}>
         <FontAwesome5 name="trophy" size={32} color="gray" style={styles.footerIcon} />
         <Text>レース情報</Text>
       </TouchableOpacity>
@@ -90,7 +83,26 @@ const styles = StyleSheet.create({
 
 const Container: React.FC<RecieveProps> = ({ ...props }) => {
   const navigation = useNavigation<StackNavigationProp<HomeStackParamList, "Home">>();
-  return <Component navigation={navigation} {...props} />;
+
+  const onPressRunningHorse = useCallback(
+    (raceName?: string | null, raceDay?: string | null) => {
+      navigation.navigate("RunningHorse", {
+        raceName: raceName?.replace(/Ｇ１|Ｇ２|Ｇ３|・/gi, "") ?? "",
+        raceDay: raceDay ?? "",
+      });
+    },
+    [navigation]
+  );
+
+  const onPressRace = useCallback(
+    (raceName?: string | null) => {
+      navigation.navigate("Race", {
+        raceName: raceName?.replace(/Ｇ１|Ｇ２|Ｇ３|・/gi, "") ?? "",
+      });
+    },
+    [navigation]
+  );
+  return <Component onPressRunningHorse={onPressRunningHorse} onPressRace={onPressRace} {...props} />;
 };
 
 export default Container;
