@@ -1,17 +1,22 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { StyleSheet, View, TouchableOpacity, Text } from "react-native";
 import { CircleImage } from "../CircleImage";
 import { DUMMY_IMAGE } from "../constants";
+import { useNavigation } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { HomeStackParamList } from "../../navigation/types";
 
 type RecieveProps = {
   raceName: string;
   supplement: string;
 };
-type ContainerCreatedProps = {};
+type ContainerCreatedProps = {
+  onPress: () => void;
+};
 type Props = Omit<RecieveProps & ContainerCreatedProps, "">;
 
-const Component: React.FC<Props> = ({ raceName, supplement, ..._props }) => (
-  <TouchableOpacity style={styles.container}>
+const Component: React.FC<Props> = ({ raceName, supplement, onPress, ..._props }) => (
+  <TouchableOpacity style={styles.container} onPress={onPress}>
     <CircleImage style={styles.image} uri={DUMMY_IMAGE} />
     <View style={styles.titleSupplementContainer}>
       <Text style={styles.title}>{raceName}</Text>
@@ -45,8 +50,12 @@ const styles = StyleSheet.create({
   },
 });
 
-const Container: React.FC<RecieveProps> = ({ ...props }) => {
-  return <Component {...props} />;
+const Container: React.FC<RecieveProps> = ({ raceName, ...props }) => {
+  const navigation = useNavigation<StackNavigationProp<HomeStackParamList, "RunningHorse">>();
+  const onPress = useCallback(() => {
+    navigation.navigate("Race", { raceName });
+  }, [navigation, raceName]);
+  return <Component raceName={raceName} onPress={onPress} {...props} />;
 };
 
 export default Container;
