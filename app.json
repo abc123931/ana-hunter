@@ -22,7 +22,9 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": false
+      "supportsTablet": false,
+      "bundleIdentifier": "com.ana-hunter",
+      "buildNumber": "1.0.0"
     },
     "android": {
       "package": "com.anahunter",
