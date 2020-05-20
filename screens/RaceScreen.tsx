@@ -1,5 +1,6 @@
 import React from "react";
-import { StyleSheet, SafeAreaView, Text } from "react-native";
+import { StyleSheet, SafeAreaView } from "react-native";
+import { Race } from "../components/Race";
 
 type RecieveProps = {};
 type ContainerCreatedProps = {};
@@ -7,7 +8,7 @@ type Props = Omit<RecieveProps & ContainerCreatedProps, "">;
 
 const Component: React.FC<Props> = ({ ..._props }) => (
   <SafeAreaView style={styles.container}>
-    <Text>レース画面</Text>
+    <Race />
   </SafeAreaView>
 );
 

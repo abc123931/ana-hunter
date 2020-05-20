@@ -45,7 +45,6 @@ const styles = StyleSheet.create({
   },
   horseNum: {
     flex: 1,
-    backgroundColor: "red",
     justifyContent: "center",
     height: "100%",
   },

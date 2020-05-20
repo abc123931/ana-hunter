@@ -1,25 +1,25 @@
 import React from "react";
-import { StyleSheet, View, Text, ScrollView } from "react-native";
+import { StyleSheet, ScrollView } from "react-native";
 import { RouteProp, useRoute } from "@react-navigation/native";
 import { HomeStackParamList } from "../../navigation/types";
-import { RaceDayInfo, RunningHorseTable } from "./Shared";
 import { RaceTitle } from "../RaceTitle";
+import { PageNav } from "../PageNav";
+import { RACE_NAVIGATIONS } from "../PageNav/constants";
+import { RaceTable } from "./RaceTable";
 
 type RecieveProps = {};
 type ContainerCreatedProps = {
   raceName: string;
-  raceDay: string;
+  nav: string;
+  setNav: (id: string) => void;
 };
 type Props = Omit<RecieveProps & ContainerCreatedProps, "">;
 
-const Component: React.FC<Props> = ({ raceName, raceDay, ..._props }) => (
+const Component: React.FC<Props> = ({ raceName, nav, setNav, ..._props }) => (
   <ScrollView style={styles.container}>
-    <RaceDayInfo raceDay={raceDay} />
-    <RaceTitle raceName={raceName} supplement="競馬場名と芝orダート 距離をいれる予定" />
-    <View style={styles.horizon}>
-      <Text style={styles.horizonText}>出走馬情報</Text>
-    </View>
-    <RunningHorseTable raceName={raceName} raceDay={raceDay} />
+    <RaceTitle raceName={raceName} supplement="補足が入ります" />
+    <PageNav nav={nav} setNav={setNav} navigations={RACE_NAVIGATIONS} />
+    <RaceTable raceName={raceName} />
   </ScrollView>
 );
 
@@ -44,9 +44,10 @@ const styles = StyleSheet.create({
 });
 
 const Container: React.FC<RecieveProps> = ({ ...props }) => {
-  const route = useRoute<RouteProp<HomeStackParamList, "RunningHorse">>();
-  const { raceName, raceDay } = route.params;
-  return <Component raceName={raceName} raceDay={raceDay} {...props} />;
+  const [nav, setNav] = React.useState<string>("horseNumTrend");
+  const route = useRoute<RouteProp<HomeStackParamList, "Race">>();
+  const { raceName } = route.params;
+  return <Component raceName={raceName} nav={nav} setNav={setNav} {...props} />;
 };
 
 export default Container;

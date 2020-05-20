@@ -1,20 +1,21 @@
 import React from "react";
 import { StyleSheet, View, TouchableOpacity, Text } from "react-native";
-import { CircleImage } from "../../CircleImage";
-import { DUMMY_IMAGE } from "../../constants";
+import { CircleImage } from "../CircleImage";
+import { DUMMY_IMAGE } from "../constants";
 
 type RecieveProps = {
   raceName: string;
+  supplement: string;
 };
 type ContainerCreatedProps = {};
 type Props = Omit<RecieveProps & ContainerCreatedProps, "">;
 
-const Component: React.FC<Props> = ({ raceName, ..._props }) => (
+const Component: React.FC<Props> = ({ raceName, supplement, ..._props }) => (
   <TouchableOpacity style={styles.container}>
     <CircleImage style={styles.image} uri={DUMMY_IMAGE} />
     <View style={styles.titleSupplementContainer}>
       <Text style={styles.title}>{raceName}</Text>
-      <Text style={styles.supplement}>競馬場名と芝orダート 距離をいれる予定</Text>
+      <Text style={styles.supplement}>{supplement}</Text>
     </View>
   </TouchableOpacity>
 );
