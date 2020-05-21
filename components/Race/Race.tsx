@@ -4,8 +4,9 @@ import { RouteProp, useRoute } from "@react-navigation/native";
 import { HomeStackParamList } from "../../navigation/types";
 import { RaceTitle } from "../RaceTitle";
 import { PageNav } from "../PageNav";
-import { RACE_NAVIGATIONS } from "../PageNav/constants";
+import { RACE_NAVIGATIONS, RACE_NAVIGATION_ID } from "../PageNav/constants";
 import { RaceTable } from "./RaceTable";
+import { RotationTable } from "./RotationTable";
 
 type RecieveProps = {};
 type ContainerCreatedProps = {
@@ -19,7 +20,8 @@ const Component: React.FC<Props> = ({ raceName, nav, setNav, ..._props }) => (
   <ScrollView style={styles.container}>
     <RaceTitle raceName={raceName} supplement="補足が入ります" />
     <PageNav nav={nav} setNav={setNav} navigations={RACE_NAVIGATIONS} />
-    <RaceTable raceName={raceName} />
+    {nav === RACE_NAVIGATION_ID.horseNumTrend && <RaceTable raceName={raceName} />}
+    {nav === RACE_NAVIGATION_ID.rotation && <RotationTable raceName={raceName} />}
   </ScrollView>
 );
 
@@ -28,18 +30,6 @@ const styles = StyleSheet.create({
   image: {
     width: 100,
     height: 100,
-  },
-  horizon: {
-    display: "flex",
-    alignItems: "center",
-    width: "100%",
-    paddingTop: 16,
-    paddingBottom: 16,
-    backgroundColor: "#f6f6f9",
-  },
-  horizonText: {
-    fontSize: 18,
-    color: "gray",
   },
 });
 

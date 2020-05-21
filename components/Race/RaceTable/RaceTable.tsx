@@ -4,7 +4,7 @@ import { TableHeader } from "./TableHeader";
 import { TableRow } from "./TableRow";
 import { SearchHorseNumCountQuery } from "../../../apollo/graphql";
 import { getWakuNumberStyleArray, WakuNumberStyle } from "../../constants";
-import { useWinShowRateOrder } from "../../../hooks/useWinShowRateOrder";
+import { useHorseNumCountWinShowRateOrder } from "../../../hooks/useHorseNumCountWinShowRateOrder";
 import { TableLoading } from "../../Loading";
 
 type RecieveProps = {
@@ -38,9 +38,13 @@ const styles = StyleSheet.create({
 });
 
 const Container: React.FC<RecieveProps> = ({ raceName, ...props }) => {
-  const { sortedSearchRaceHorseNumCount, loading, error, handleWinRateDesc, handleShowRateDesc } = useWinShowRateOrder(
-    raceName
-  );
+  const {
+    sortedSearchRaceHorseNumCount,
+    loading,
+    error,
+    handleWinRateDesc,
+    handleShowRateDesc,
+  } = useHorseNumCountWinShowRateOrder(raceName);
   if (loading) return <TableLoading />;
   if (error) return <Text>エラーが発生しました</Text>;
   if (

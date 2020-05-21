@@ -9,7 +9,7 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
-  bigint: any;
+  bigint: number;
   numeric: any;
   timestamptz: string;
   uuid: string;
@@ -4838,6 +4838,10 @@ export type MutationRoot = {
   delete_results?: Maybe<ResultsMutationResponse>;
   /** delete single row from the table: "results" */
   delete_results_by_pk?: Maybe<Results>;
+  /** delete data from the table: "rotation_result" */
+  delete_rotation_result?: Maybe<RotationResultMutationResponse>;
+  /** delete single row from the table: "rotation_result" */
+  delete_rotation_result_by_pk?: Maybe<RotationResult>;
   /** delete data from the table: "running_horses" */
   delete_running_horses?: Maybe<RunningHorsesMutationResponse>;
   /** delete single row from the table: "running_horses" */
@@ -4916,6 +4920,10 @@ export type MutationRoot = {
   insert_results?: Maybe<ResultsMutationResponse>;
   /** insert a single row into the table: "results" */
   insert_results_one?: Maybe<Results>;
+  /** insert data into the table: "rotation_result" */
+  insert_rotation_result?: Maybe<RotationResultMutationResponse>;
+  /** insert a single row into the table: "rotation_result" */
+  insert_rotation_result_one?: Maybe<RotationResult>;
   /** insert data into the table: "running_horses" */
   insert_running_horses?: Maybe<RunningHorsesMutationResponse>;
   /** insert a single row into the table: "running_horses" */
@@ -4988,6 +4996,10 @@ export type MutationRoot = {
   update_results?: Maybe<ResultsMutationResponse>;
   /** update single row of the table: "results" */
   update_results_by_pk?: Maybe<Results>;
+  /** update data of the table: "rotation_result" */
+  update_rotation_result?: Maybe<RotationResultMutationResponse>;
+  /** update single row of the table: "rotation_result" */
+  update_rotation_result_by_pk?: Maybe<RotationResult>;
   /** update data of the table: "running_horses" */
   update_running_horses?: Maybe<RunningHorsesMutationResponse>;
   /** update single row of the table: "running_horses" */
@@ -5148,6 +5160,16 @@ export type MutationRootDeleteResultsArgs = {
 /** mutation root */
 export type MutationRootDeleteResultsByPkArgs = {
   result_id: Scalars["String"];
+};
+
+/** mutation root */
+export type MutationRootDeleteRotationResultArgs = {
+  where: RotationResultBoolExp;
+};
+
+/** mutation root */
+export type MutationRootDeleteRotationResultByPkArgs = {
+  common_race_name: Scalars["String"];
 };
 
 /** mutation root */
@@ -5369,6 +5391,18 @@ export type MutationRootInsertResultsArgs = {
 export type MutationRootInsertResultsOneArgs = {
   object: ResultsInsertInput;
   on_conflict?: Maybe<ResultsOnConflict>;
+};
+
+/** mutation root */
+export type MutationRootInsertRotationResultArgs = {
+  objects: Array<RotationResultInsertInput>;
+  on_conflict?: Maybe<RotationResultOnConflict>;
+};
+
+/** mutation root */
+export type MutationRootInsertRotationResultOneArgs = {
+  object: RotationResultInsertInput;
+  on_conflict?: Maybe<RotationResultOnConflict>;
 };
 
 /** mutation root */
@@ -5613,6 +5647,20 @@ export type MutationRootUpdateResultsByPkArgs = {
   _inc?: Maybe<ResultsIncInput>;
   _set?: Maybe<ResultsSetInput>;
   pk_columns: ResultsPkColumnsInput;
+};
+
+/** mutation root */
+export type MutationRootUpdateRotationResultArgs = {
+  _inc?: Maybe<RotationResultIncInput>;
+  _set?: Maybe<RotationResultSetInput>;
+  where: RotationResultBoolExp;
+};
+
+/** mutation root */
+export type MutationRootUpdateRotationResultByPkArgs = {
+  _inc?: Maybe<RotationResultIncInput>;
+  _set?: Maybe<RotationResultSetInput>;
+  pk_columns: RotationResultPkColumnsInput;
 };
 
 /** mutation root */
@@ -6028,6 +6076,12 @@ export type QueryRoot = {
   results_aggregate: ResultsAggregate;
   /** fetch data from the table: "results" using primary key columns */
   results_by_pk?: Maybe<Results>;
+  /** fetch data from the table: "rotation_result" */
+  rotation_result: Array<RotationResult>;
+  /** fetch aggregated fields from the table: "rotation_result" */
+  rotation_result_aggregate: RotationResultAggregate;
+  /** fetch data from the table: "rotation_result" using primary key columns */
+  rotation_result_by_pk?: Maybe<RotationResult>;
   /** fetch data from the table: "running_horses" */
   running_horses: Array<RunningHorses>;
   /** fetch aggregated fields from the table: "running_horses" */
@@ -6038,6 +6092,10 @@ export type QueryRoot = {
   search_race_horse_num_count: Array<HorseNumCount>;
   /** execute function "search_race_horse_num_count" and query aggregates on result of table type "horse_num_count" */
   search_race_horse_num_count_aggregate: HorseNumCountAggregate;
+  /** execute function "search_rotation_count" which returns "rotation_result" */
+  search_rotation_count: Array<RotationResult>;
+  /** execute function "search_rotation_count" and query aggregates on result of table type "rotation_result" */
+  search_rotation_count_aggregate: RotationResultAggregate;
   /** execute function "search_running_horses" which returns "running_horses" */
   search_running_horses: Array<RunningHorses>;
   /** execute function "search_running_horses" and query aggregates on result of table type "running_horses" */
@@ -6426,6 +6484,29 @@ export type QueryRootResultsByPkArgs = {
 };
 
 /** query root */
+export type QueryRootRotationResultArgs = {
+  distinct_on?: Maybe<Array<RotationResultSelectColumn>>;
+  limit?: Maybe<Scalars["Int"]>;
+  offset?: Maybe<Scalars["Int"]>;
+  order_by?: Maybe<Array<RotationResultOrderBy>>;
+  where?: Maybe<RotationResultBoolExp>;
+};
+
+/** query root */
+export type QueryRootRotationResultAggregateArgs = {
+  distinct_on?: Maybe<Array<RotationResultSelectColumn>>;
+  limit?: Maybe<Scalars["Int"]>;
+  offset?: Maybe<Scalars["Int"]>;
+  order_by?: Maybe<Array<RotationResultOrderBy>>;
+  where?: Maybe<RotationResultBoolExp>;
+};
+
+/** query root */
+export type QueryRootRotationResultByPkArgs = {
+  common_race_name: Scalars["String"];
+};
+
+/** query root */
 export type QueryRootRunningHorsesArgs = {
   distinct_on?: Maybe<Array<RunningHorsesSelectColumn>>;
   limit?: Maybe<Scalars["Int"]>;
@@ -6466,6 +6547,26 @@ export type QueryRootSearchRaceHorseNumCountAggregateArgs = {
   offset?: Maybe<Scalars["Int"]>;
   order_by?: Maybe<Array<HorseNumCountOrderBy>>;
   where?: Maybe<HorseNumCountBoolExp>;
+};
+
+/** query root */
+export type QueryRootSearchRotationCountArgs = {
+  args: SearchRotationCountArgs;
+  distinct_on?: Maybe<Array<RotationResultSelectColumn>>;
+  limit?: Maybe<Scalars["Int"]>;
+  offset?: Maybe<Scalars["Int"]>;
+  order_by?: Maybe<Array<RotationResultOrderBy>>;
+  where?: Maybe<RotationResultBoolExp>;
+};
+
+/** query root */
+export type QueryRootSearchRotationCountAggregateArgs = {
+  args: SearchRotationCountArgs;
+  distinct_on?: Maybe<Array<RotationResultSelectColumn>>;
+  limit?: Maybe<Scalars["Int"]>;
+  offset?: Maybe<Scalars["Int"]>;
+  order_by?: Maybe<Array<RotationResultOrderBy>>;
+  where?: Maybe<RotationResultBoolExp>;
 };
 
 /** query root */
@@ -14969,6 +15070,396 @@ export type ResultsVarianceOrderBy = {
   win_popular_rank?: Maybe<OrderBy>;
 };
 
+/**
+ * ローテーションviewのリザルトテーブル
+ *
+ *
+ * columns and relationships of "rotation_result"
+ */
+export type RotationResult = {
+  __typename?: "rotation_result";
+  common_race_name: Scalars["String"];
+  first_count: Scalars["bigint"];
+  lag_common_race_name: Scalars["String"];
+  out_count: Scalars["bigint"];
+  second_count: Scalars["bigint"];
+  third_count: Scalars["bigint"];
+  total_count: Scalars["bigint"];
+};
+
+/** aggregated selection of "rotation_result" */
+export type RotationResultAggregate = {
+  __typename?: "rotation_result_aggregate";
+  aggregate?: Maybe<RotationResultAggregateFields>;
+  nodes: Array<RotationResult>;
+};
+
+/** aggregate fields of "rotation_result" */
+export type RotationResultAggregateFields = {
+  __typename?: "rotation_result_aggregate_fields";
+  avg?: Maybe<RotationResultAvgFields>;
+  count?: Maybe<Scalars["Int"]>;
+  max?: Maybe<RotationResultMaxFields>;
+  min?: Maybe<RotationResultMinFields>;
+  stddev?: Maybe<RotationResultStddevFields>;
+  stddev_pop?: Maybe<RotationResultStddevPopFields>;
+  stddev_samp?: Maybe<RotationResultStddevSampFields>;
+  sum?: Maybe<RotationResultSumFields>;
+  var_pop?: Maybe<RotationResultVarPopFields>;
+  var_samp?: Maybe<RotationResultVarSampFields>;
+  variance?: Maybe<RotationResultVarianceFields>;
+};
+
+/** aggregate fields of "rotation_result" */
+export type RotationResultAggregateFieldsCountArgs = {
+  columns?: Maybe<Array<RotationResultSelectColumn>>;
+  distinct?: Maybe<Scalars["Boolean"]>;
+};
+
+/** order by aggregate values of table "rotation_result" */
+export type RotationResultAggregateOrderBy = {
+  avg?: Maybe<RotationResultAvgOrderBy>;
+  count?: Maybe<OrderBy>;
+  max?: Maybe<RotationResultMaxOrderBy>;
+  min?: Maybe<RotationResultMinOrderBy>;
+  stddev?: Maybe<RotationResultStddevOrderBy>;
+  stddev_pop?: Maybe<RotationResultStddevPopOrderBy>;
+  stddev_samp?: Maybe<RotationResultStddevSampOrderBy>;
+  sum?: Maybe<RotationResultSumOrderBy>;
+  var_pop?: Maybe<RotationResultVarPopOrderBy>;
+  var_samp?: Maybe<RotationResultVarSampOrderBy>;
+  variance?: Maybe<RotationResultVarianceOrderBy>;
+};
+
+/** input type for inserting array relation for remote table "rotation_result" */
+export type RotationResultArrRelInsertInput = {
+  data: Array<RotationResultInsertInput>;
+  on_conflict?: Maybe<RotationResultOnConflict>;
+};
+
+/** aggregate avg on columns */
+export type RotationResultAvgFields = {
+  __typename?: "rotation_result_avg_fields";
+  first_count?: Maybe<Scalars["Float"]>;
+  out_count?: Maybe<Scalars["Float"]>;
+  second_count?: Maybe<Scalars["Float"]>;
+  third_count?: Maybe<Scalars["Float"]>;
+  total_count?: Maybe<Scalars["Float"]>;
+};
+
+/** order by avg() on columns of table "rotation_result" */
+export type RotationResultAvgOrderBy = {
+  first_count?: Maybe<OrderBy>;
+  out_count?: Maybe<OrderBy>;
+  second_count?: Maybe<OrderBy>;
+  third_count?: Maybe<OrderBy>;
+  total_count?: Maybe<OrderBy>;
+};
+
+/** Boolean expression to filter rows from the table "rotation_result". All fields are combined with a logical 'AND'. */
+export type RotationResultBoolExp = {
+  _and?: Maybe<Array<Maybe<RotationResultBoolExp>>>;
+  _not?: Maybe<RotationResultBoolExp>;
+  _or?: Maybe<Array<Maybe<RotationResultBoolExp>>>;
+  common_race_name?: Maybe<StringComparisonExp>;
+  first_count?: Maybe<BigintComparisonExp>;
+  lag_common_race_name?: Maybe<StringComparisonExp>;
+  out_count?: Maybe<BigintComparisonExp>;
+  second_count?: Maybe<BigintComparisonExp>;
+  third_count?: Maybe<BigintComparisonExp>;
+  total_count?: Maybe<BigintComparisonExp>;
+};
+
+/** unique or primary key constraints on table "rotation_result" */
+export enum RotationResultConstraint {
+  /** unique or primary key constraint */
+  LOTATION_RESULT_PKEY = "lotation_result_pkey",
+}
+
+/** input type for incrementing integer column in table "rotation_result" */
+export type RotationResultIncInput = {
+  first_count?: Maybe<Scalars["bigint"]>;
+  out_count?: Maybe<Scalars["bigint"]>;
+  second_count?: Maybe<Scalars["bigint"]>;
+  third_count?: Maybe<Scalars["bigint"]>;
+  total_count?: Maybe<Scalars["bigint"]>;
+};
+
+/** input type for inserting data into table "rotation_result" */
+export type RotationResultInsertInput = {
+  common_race_name?: Maybe<Scalars["String"]>;
+  first_count?: Maybe<Scalars["bigint"]>;
+  lag_common_race_name?: Maybe<Scalars["String"]>;
+  out_count?: Maybe<Scalars["bigint"]>;
+  second_count?: Maybe<Scalars["bigint"]>;
+  third_count?: Maybe<Scalars["bigint"]>;
+  total_count?: Maybe<Scalars["bigint"]>;
+};
+
+/** aggregate max on columns */
+export type RotationResultMaxFields = {
+  __typename?: "rotation_result_max_fields";
+  common_race_name?: Maybe<Scalars["String"]>;
+  first_count?: Maybe<Scalars["bigint"]>;
+  lag_common_race_name?: Maybe<Scalars["String"]>;
+  out_count?: Maybe<Scalars["bigint"]>;
+  second_count?: Maybe<Scalars["bigint"]>;
+  third_count?: Maybe<Scalars["bigint"]>;
+  total_count?: Maybe<Scalars["bigint"]>;
+};
+
+/** order by max() on columns of table "rotation_result" */
+export type RotationResultMaxOrderBy = {
+  common_race_name?: Maybe<OrderBy>;
+  first_count?: Maybe<OrderBy>;
+  lag_common_race_name?: Maybe<OrderBy>;
+  out_count?: Maybe<OrderBy>;
+  second_count?: Maybe<OrderBy>;
+  third_count?: Maybe<OrderBy>;
+  total_count?: Maybe<OrderBy>;
+};
+
+/** aggregate min on columns */
+export type RotationResultMinFields = {
+  __typename?: "rotation_result_min_fields";
+  common_race_name?: Maybe<Scalars["String"]>;
+  first_count?: Maybe<Scalars["bigint"]>;
+  lag_common_race_name?: Maybe<Scalars["String"]>;
+  out_count?: Maybe<Scalars["bigint"]>;
+  second_count?: Maybe<Scalars["bigint"]>;
+  third_count?: Maybe<Scalars["bigint"]>;
+  total_count?: Maybe<Scalars["bigint"]>;
+};
+
+/** order by min() on columns of table "rotation_result" */
+export type RotationResultMinOrderBy = {
+  common_race_name?: Maybe<OrderBy>;
+  first_count?: Maybe<OrderBy>;
+  lag_common_race_name?: Maybe<OrderBy>;
+  out_count?: Maybe<OrderBy>;
+  second_count?: Maybe<OrderBy>;
+  third_count?: Maybe<OrderBy>;
+  total_count?: Maybe<OrderBy>;
+};
+
+/** response of any mutation on the table "rotation_result" */
+export type RotationResultMutationResponse = {
+  __typename?: "rotation_result_mutation_response";
+  /** number of affected rows by the mutation */
+  affected_rows: Scalars["Int"];
+  /** data of the affected rows by the mutation */
+  returning: Array<RotationResult>;
+};
+
+/** input type for inserting object relation for remote table "rotation_result" */
+export type RotationResultObjRelInsertInput = {
+  data: RotationResultInsertInput;
+  on_conflict?: Maybe<RotationResultOnConflict>;
+};
+
+/** on conflict condition type for table "rotation_result" */
+export type RotationResultOnConflict = {
+  constraint: RotationResultConstraint;
+  update_columns: Array<RotationResultUpdateColumn>;
+  where?: Maybe<RotationResultBoolExp>;
+};
+
+/** ordering options when selecting data from "rotation_result" */
+export type RotationResultOrderBy = {
+  common_race_name?: Maybe<OrderBy>;
+  first_count?: Maybe<OrderBy>;
+  lag_common_race_name?: Maybe<OrderBy>;
+  out_count?: Maybe<OrderBy>;
+  second_count?: Maybe<OrderBy>;
+  third_count?: Maybe<OrderBy>;
+  total_count?: Maybe<OrderBy>;
+};
+
+/** primary key columns input for table: "rotation_result" */
+export type RotationResultPkColumnsInput = {
+  common_race_name: Scalars["String"];
+};
+
+/** select columns of table "rotation_result" */
+export enum RotationResultSelectColumn {
+  /** column name */
+  COMMON_RACE_NAME = "common_race_name",
+  /** column name */
+  FIRST_COUNT = "first_count",
+  /** column name */
+  LAG_COMMON_RACE_NAME = "lag_common_race_name",
+  /** column name */
+  OUT_COUNT = "out_count",
+  /** column name */
+  SECOND_COUNT = "second_count",
+  /** column name */
+  THIRD_COUNT = "third_count",
+  /** column name */
+  TOTAL_COUNT = "total_count",
+}
+
+/** input type for updating data in table "rotation_result" */
+export type RotationResultSetInput = {
+  common_race_name?: Maybe<Scalars["String"]>;
+  first_count?: Maybe<Scalars["bigint"]>;
+  lag_common_race_name?: Maybe<Scalars["String"]>;
+  out_count?: Maybe<Scalars["bigint"]>;
+  second_count?: Maybe<Scalars["bigint"]>;
+  third_count?: Maybe<Scalars["bigint"]>;
+  total_count?: Maybe<Scalars["bigint"]>;
+};
+
+/** aggregate stddev on columns */
+export type RotationResultStddevFields = {
+  __typename?: "rotation_result_stddev_fields";
+  first_count?: Maybe<Scalars["Float"]>;
+  out_count?: Maybe<Scalars["Float"]>;
+  second_count?: Maybe<Scalars["Float"]>;
+  third_count?: Maybe<Scalars["Float"]>;
+  total_count?: Maybe<Scalars["Float"]>;
+};
+
+/** order by stddev() on columns of table "rotation_result" */
+export type RotationResultStddevOrderBy = {
+  first_count?: Maybe<OrderBy>;
+  out_count?: Maybe<OrderBy>;
+  second_count?: Maybe<OrderBy>;
+  third_count?: Maybe<OrderBy>;
+  total_count?: Maybe<OrderBy>;
+};
+
+/** aggregate stddev_pop on columns */
+export type RotationResultStddevPopFields = {
+  __typename?: "rotation_result_stddev_pop_fields";
+  first_count?: Maybe<Scalars["Float"]>;
+  out_count?: Maybe<Scalars["Float"]>;
+  second_count?: Maybe<Scalars["Float"]>;
+  third_count?: Maybe<Scalars["Float"]>;
+  total_count?: Maybe<Scalars["Float"]>;
+};
+
+/** order by stddev_pop() on columns of table "rotation_result" */
+export type RotationResultStddevPopOrderBy = {
+  first_count?: Maybe<OrderBy>;
+  out_count?: Maybe<OrderBy>;
+  second_count?: Maybe<OrderBy>;
+  third_count?: Maybe<OrderBy>;
+  total_count?: Maybe<OrderBy>;
+};
+
+/** aggregate stddev_samp on columns */
+export type RotationResultStddevSampFields = {
+  __typename?: "rotation_result_stddev_samp_fields";
+  first_count?: Maybe<Scalars["Float"]>;
+  out_count?: Maybe<Scalars["Float"]>;
+  second_count?: Maybe<Scalars["Float"]>;
+  third_count?: Maybe<Scalars["Float"]>;
+  total_count?: Maybe<Scalars["Float"]>;
+};
+
+/** order by stddev_samp() on columns of table "rotation_result" */
+export type RotationResultStddevSampOrderBy = {
+  first_count?: Maybe<OrderBy>;
+  out_count?: Maybe<OrderBy>;
+  second_count?: Maybe<OrderBy>;
+  third_count?: Maybe<OrderBy>;
+  total_count?: Maybe<OrderBy>;
+};
+
+/** aggregate sum on columns */
+export type RotationResultSumFields = {
+  __typename?: "rotation_result_sum_fields";
+  first_count?: Maybe<Scalars["bigint"]>;
+  out_count?: Maybe<Scalars["bigint"]>;
+  second_count?: Maybe<Scalars["bigint"]>;
+  third_count?: Maybe<Scalars["bigint"]>;
+  total_count?: Maybe<Scalars["bigint"]>;
+};
+
+/** order by sum() on columns of table "rotation_result" */
+export type RotationResultSumOrderBy = {
+  first_count?: Maybe<OrderBy>;
+  out_count?: Maybe<OrderBy>;
+  second_count?: Maybe<OrderBy>;
+  third_count?: Maybe<OrderBy>;
+  total_count?: Maybe<OrderBy>;
+};
+
+/** update columns of table "rotation_result" */
+export enum RotationResultUpdateColumn {
+  /** column name */
+  COMMON_RACE_NAME = "common_race_name",
+  /** column name */
+  FIRST_COUNT = "first_count",
+  /** column name */
+  LAG_COMMON_RACE_NAME = "lag_common_race_name",
+  /** column name */
+  OUT_COUNT = "out_count",
+  /** column name */
+  SECOND_COUNT = "second_count",
+  /** column name */
+  THIRD_COUNT = "third_count",
+  /** column name */
+  TOTAL_COUNT = "total_count",
+}
+
+/** aggregate var_pop on columns */
+export type RotationResultVarPopFields = {
+  __typename?: "rotation_result_var_pop_fields";
+  first_count?: Maybe<Scalars["Float"]>;
+  out_count?: Maybe<Scalars["Float"]>;
+  second_count?: Maybe<Scalars["Float"]>;
+  third_count?: Maybe<Scalars["Float"]>;
+  total_count?: Maybe<Scalars["Float"]>;
+};
+
+/** order by var_pop() on columns of table "rotation_result" */
+export type RotationResultVarPopOrderBy = {
+  first_count?: Maybe<OrderBy>;
+  out_count?: Maybe<OrderBy>;
+  second_count?: Maybe<OrderBy>;
+  third_count?: Maybe<OrderBy>;
+  total_count?: Maybe<OrderBy>;
+};
+
+/** aggregate var_samp on columns */
+export type RotationResultVarSampFields = {
+  __typename?: "rotation_result_var_samp_fields";
+  first_count?: Maybe<Scalars["Float"]>;
+  out_count?: Maybe<Scalars["Float"]>;
+  second_count?: Maybe<Scalars["Float"]>;
+  third_count?: Maybe<Scalars["Float"]>;
+  total_count?: Maybe<Scalars["Float"]>;
+};
+
+/** order by var_samp() on columns of table "rotation_result" */
+export type RotationResultVarSampOrderBy = {
+  first_count?: Maybe<OrderBy>;
+  out_count?: Maybe<OrderBy>;
+  second_count?: Maybe<OrderBy>;
+  third_count?: Maybe<OrderBy>;
+  total_count?: Maybe<OrderBy>;
+};
+
+/** aggregate variance on columns */
+export type RotationResultVarianceFields = {
+  __typename?: "rotation_result_variance_fields";
+  first_count?: Maybe<Scalars["Float"]>;
+  out_count?: Maybe<Scalars["Float"]>;
+  second_count?: Maybe<Scalars["Float"]>;
+  third_count?: Maybe<Scalars["Float"]>;
+  total_count?: Maybe<Scalars["Float"]>;
+};
+
+/** order by variance() on columns of table "rotation_result" */
+export type RotationResultVarianceOrderBy = {
+  first_count?: Maybe<OrderBy>;
+  out_count?: Maybe<OrderBy>;
+  second_count?: Maybe<OrderBy>;
+  third_count?: Maybe<OrderBy>;
+  total_count?: Maybe<OrderBy>;
+};
+
 /** columns and relationships of "running_horses" */
 export type RunningHorses = {
   __typename?: "running_horses";
@@ -15311,6 +15802,10 @@ export type SearchRaceHorseNumCountArgs = {
   argname?: Maybe<Scalars["String"]>;
 };
 
+export type SearchRotationCountArgs = {
+  argname?: Maybe<Scalars["String"]>;
+};
+
 export type SearchRunningHorsesArgs = {
   argday?: Maybe<Scalars["String"]>;
   argname?: Maybe<Scalars["String"]>;
@@ -15413,6 +15908,12 @@ export type SubscriptionRoot = {
   results_aggregate: ResultsAggregate;
   /** fetch data from the table: "results" using primary key columns */
   results_by_pk?: Maybe<Results>;
+  /** fetch data from the table: "rotation_result" */
+  rotation_result: Array<RotationResult>;
+  /** fetch aggregated fields from the table: "rotation_result" */
+  rotation_result_aggregate: RotationResultAggregate;
+  /** fetch data from the table: "rotation_result" using primary key columns */
+  rotation_result_by_pk?: Maybe<RotationResult>;
   /** fetch data from the table: "running_horses" */
   running_horses: Array<RunningHorses>;
   /** fetch aggregated fields from the table: "running_horses" */
@@ -15423,6 +15924,10 @@ export type SubscriptionRoot = {
   search_race_horse_num_count: Array<HorseNumCount>;
   /** execute function "search_race_horse_num_count" and query aggregates on result of table type "horse_num_count" */
   search_race_horse_num_count_aggregate: HorseNumCountAggregate;
+  /** execute function "search_rotation_count" which returns "rotation_result" */
+  search_rotation_count: Array<RotationResult>;
+  /** execute function "search_rotation_count" and query aggregates on result of table type "rotation_result" */
+  search_rotation_count_aggregate: RotationResultAggregate;
   /** execute function "search_running_horses" which returns "running_horses" */
   search_running_horses: Array<RunningHorses>;
   /** execute function "search_running_horses" and query aggregates on result of table type "running_horses" */
@@ -15811,6 +16316,29 @@ export type SubscriptionRootResultsByPkArgs = {
 };
 
 /** subscription root */
+export type SubscriptionRootRotationResultArgs = {
+  distinct_on?: Maybe<Array<RotationResultSelectColumn>>;
+  limit?: Maybe<Scalars["Int"]>;
+  offset?: Maybe<Scalars["Int"]>;
+  order_by?: Maybe<Array<RotationResultOrderBy>>;
+  where?: Maybe<RotationResultBoolExp>;
+};
+
+/** subscription root */
+export type SubscriptionRootRotationResultAggregateArgs = {
+  distinct_on?: Maybe<Array<RotationResultSelectColumn>>;
+  limit?: Maybe<Scalars["Int"]>;
+  offset?: Maybe<Scalars["Int"]>;
+  order_by?: Maybe<Array<RotationResultOrderBy>>;
+  where?: Maybe<RotationResultBoolExp>;
+};
+
+/** subscription root */
+export type SubscriptionRootRotationResultByPkArgs = {
+  common_race_name: Scalars["String"];
+};
+
+/** subscription root */
 export type SubscriptionRootRunningHorsesArgs = {
   distinct_on?: Maybe<Array<RunningHorsesSelectColumn>>;
   limit?: Maybe<Scalars["Int"]>;
@@ -15851,6 +16379,26 @@ export type SubscriptionRootSearchRaceHorseNumCountAggregateArgs = {
   offset?: Maybe<Scalars["Int"]>;
   order_by?: Maybe<Array<HorseNumCountOrderBy>>;
   where?: Maybe<HorseNumCountBoolExp>;
+};
+
+/** subscription root */
+export type SubscriptionRootSearchRotationCountArgs = {
+  args: SearchRotationCountArgs;
+  distinct_on?: Maybe<Array<RotationResultSelectColumn>>;
+  limit?: Maybe<Scalars["Int"]>;
+  offset?: Maybe<Scalars["Int"]>;
+  order_by?: Maybe<Array<RotationResultOrderBy>>;
+  where?: Maybe<RotationResultBoolExp>;
+};
+
+/** subscription root */
+export type SubscriptionRootSearchRotationCountAggregateArgs = {
+  args: SearchRotationCountArgs;
+  distinct_on?: Maybe<Array<RotationResultSelectColumn>>;
+  limit?: Maybe<Scalars["Int"]>;
+  offset?: Maybe<Scalars["Int"]>;
+  order_by?: Maybe<Array<RotationResultOrderBy>>;
+  where?: Maybe<RotationResultBoolExp>;
 };
 
 /** subscription root */
@@ -17312,6 +17860,24 @@ export type GetWeekendRacesQuery = { __typename?: "query_root" } & {
   >;
 };
 
+export type SearchRotationCountQueryVariables = {
+  name: Scalars["String"];
+};
+
+export type SearchRotationCountQuery = { __typename?: "query_root" } & {
+  searchRotationCount: Array<
+    { __typename?: "rotation_result" } & {
+      commonRaceName: RotationResult["common_race_name"];
+      lagCommonRaceName: RotationResult["lag_common_race_name"];
+      firstCount: RotationResult["first_count"];
+      secondCount: RotationResult["second_count"];
+      thirdCount: RotationResult["third_count"];
+      outCount: RotationResult["out_count"];
+      totalCount: RotationResult["total_count"];
+    }
+  >;
+};
+
 export type SearchRunningHorsesQueryVariables = {
   day: Scalars["String"];
   name: Scalars["String"];
@@ -17482,6 +18048,58 @@ export type GetWeekendRacesLazyQueryHookResult = ReturnType<typeof useGetWeekend
 export type GetWeekendRacesQueryResult = ApolloReactCommon.QueryResult<
   GetWeekendRacesQuery,
   GetWeekendRacesQueryVariables
+>;
+export const SearchRotationCountDocument = gql`
+  query SearchRotationCount($name: String!) {
+    searchRotationCount: search_rotation_count(args: { argname: $name }) {
+      commonRaceName: common_race_name
+      lagCommonRaceName: lag_common_race_name
+      firstCount: first_count
+      secondCount: second_count
+      thirdCount: third_count
+      outCount: out_count
+      totalCount: total_count
+    }
+  }
+`;
+
+/**
+ * __useSearchRotationCountQuery__
+ *
+ * To run a query within a React component, call `useSearchRotationCountQuery` and pass it any options that fit your needs.
+ * When your component renders, `useSearchRotationCountQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useSearchRotationCountQuery({
+ *   variables: {
+ *      name: // value for 'name'
+ *   },
+ * });
+ */
+export function useSearchRotationCountQuery(
+  baseOptions?: ApolloReactHooks.QueryHookOptions<SearchRotationCountQuery, SearchRotationCountQueryVariables>
+) {
+  return ApolloReactHooks.useQuery<SearchRotationCountQuery, SearchRotationCountQueryVariables>(
+    SearchRotationCountDocument,
+    baseOptions
+  );
+}
+export function useSearchRotationCountLazyQuery(
+  baseOptions?: ApolloReactHooks.LazyQueryHookOptions<SearchRotationCountQuery, SearchRotationCountQueryVariables>
+) {
+  return ApolloReactHooks.useLazyQuery<SearchRotationCountQuery, SearchRotationCountQueryVariables>(
+    SearchRotationCountDocument,
+    baseOptions
+  );
+}
+export type SearchRotationCountQueryHookResult = ReturnType<typeof useSearchRotationCountQuery>;
+export type SearchRotationCountLazyQueryHookResult = ReturnType<typeof useSearchRotationCountLazyQuery>;
+export type SearchRotationCountQueryResult = ApolloReactCommon.QueryResult<
+  SearchRotationCountQuery,
+  SearchRotationCountQueryVariables
 >;
 export const SearchRunningHorsesDocument = gql`
   query SearchRunningHorses($day: String!, $name: String!) {

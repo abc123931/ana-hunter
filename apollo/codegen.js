@@ -26,6 +26,7 @@ module.exports = {
         scalars: {
           uuid: "string",
           timestamptz: "string",
+          bigint: "number",
           _text: "string[]",
         },
         namingConvention: {
