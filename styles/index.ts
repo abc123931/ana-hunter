@@ -1,3 +1,4 @@
+import { TabScreenSafeAreaViewStyle } from "./TabScreenSafeAreaViewStyle";
 import { SafeAreaViewStyle } from "./SafeAreaViewStyle";
 
-export { SafeAreaViewStyle };
+export { TabScreenSafeAreaViewStyle, SafeAreaViewStyle };

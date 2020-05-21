@@ -1,14 +1,14 @@
 import React from "react";
 import { SafeAreaView, Text } from "react-native";
 import { Header } from "../components/Header";
-import { SafeAreaViewStyle } from "../styles";
+import { TabScreenSafeAreaViewStyle } from "../styles";
 
 type RecieveProps = {};
 type ContainerCreatedProps = {};
 type Props = Omit<RecieveProps & ContainerCreatedProps, "">;
 
 const Component: React.FC<Props> = ({ ..._props }) => (
-  <SafeAreaView style={SafeAreaViewStyle.container}>
+  <SafeAreaView style={TabScreenSafeAreaViewStyle.container}>
     <Header />
     <Text>レース画面</Text>
   </SafeAreaView>
