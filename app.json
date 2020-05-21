@@ -28,7 +28,7 @@
     },
     "android": {
       "package": "com.anahunter",
-      "versionCode": 2
+      "versionCode": 3
     }
   }
 }
