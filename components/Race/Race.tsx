@@ -5,7 +5,7 @@ import { HomeStackParamList } from "../../navigation/types";
 import { RaceTitle } from "../RaceTitle";
 import { PageNav } from "../PageNav";
 import { RACE_NAVIGATIONS, RACE_NAVIGATION_ID } from "../PageNav/constants";
-import { RaceTable } from "./RaceTable";
+import { HorseNumTable } from "./HorseNumTable";
 import { RotationTable } from "./RotationTable";
 
 type RecieveProps = {};
@@ -20,7 +20,7 @@ const Component: React.FC<Props> = ({ raceName, nav, setNav, ..._props }) => (
   <ScrollView style={styles.container}>
     <RaceTitle raceName={raceName} supplement="補足が入ります" />
     <PageNav nav={nav} setNav={setNav} navigations={RACE_NAVIGATIONS} />
-    {nav === RACE_NAVIGATION_ID.horseNumTrend && <RaceTable raceName={raceName} />}
+    {nav === RACE_NAVIGATION_ID.horseNumTrend && <HorseNumTable raceName={raceName} />}
     {nav === RACE_NAVIGATION_ID.rotation && <RotationTable raceName={raceName} />}
   </ScrollView>
 );

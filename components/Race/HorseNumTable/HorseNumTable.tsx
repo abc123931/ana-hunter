@@ -1,11 +1,12 @@
 import React from "react";
 import { StyleSheet, View, Text } from "react-native";
-import { TableHeader } from "./TableHeader";
 import { TableRow } from "./TableRow";
 import { SearchHorseNumCountQuery } from "../../../apollo/graphql";
 import { getWakuNumberStyleArray, WakuNumberStyle } from "../../constants";
 import { useHorseNumCountWinShowRateOrder } from "../../../hooks/useHorseNumCountWinShowRateOrder";
 import { TableLoading } from "../../Loading";
+import { TableHeader } from "../TableHeader";
+import { HORSE_NUM_COLUMNS } from "./constants";
 
 type RecieveProps = {
   raceName: string;
@@ -26,7 +27,11 @@ const Component: React.FC<Props> = ({
   ..._props
 }) => (
   <View style={styles.container}>
-    <TableHeader handleWinRateDesc={handleWinRateDesc} handleShowRateDesc={handleShowRateDesc} />
+    <TableHeader
+      raceColumns={HORSE_NUM_COLUMNS}
+      handleWinRateDesc={handleWinRateDesc}
+      handleShowRateDesc={handleShowRateDesc}
+    />
     {searchRaceHorseNumCount.map((data) => (
       <TableRow key={data.horseNum} data={data} wakuNumberStyle={wakuNumberStyleList[data.horseNum - 1]} />
     ))}

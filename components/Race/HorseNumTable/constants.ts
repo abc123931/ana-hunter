@@ -1,8 +1,8 @@
 import { RaceTableColumns } from "../types";
 
-export const ROTATION_COLUMNS: RaceTableColumns = {
+export const HORSE_NUM_COLUMNS: RaceTableColumns = {
   firstColumn: {
-    label: "レース名",
+    label: "馬番",
     style: {
       flex: 1,
     },
@@ -40,7 +40,7 @@ export const ROTATION_COLUMNS: RaceTableColumns = {
   showRate: {
     label: "複勝率",
     style: {
-      flex: 1.5,
+      flex: 1,
     },
   },
 } as const;
