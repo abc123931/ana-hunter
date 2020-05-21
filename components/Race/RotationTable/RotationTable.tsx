@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, View, Text } from "react-native";
-import { TableLoading } from "../../Loading";
+import { IndicatorLoading } from "../../Loading";
 import { SearchRotationCountQuery } from "../../../apollo/graphql";
 import { TableRow } from "./TableRow";
 import { TableHeader } from "../TableHeader";
@@ -42,7 +42,7 @@ const Container: React.FC<RecieveProps> = ({ raceName, ...props }) => {
     handleWinRateDesc,
     handleShowRateDesc,
   } = useRotationCountWinShowRateOrder(raceName);
-  if (loading) return <TableLoading />;
+  if (loading) return <IndicatorLoading style={{ marginTop: 32, size: 60 }} />;
   if (error) return <Text>エラーが発生しました</Text>;
   if (!sortedSearchRotationCount || sortedSearchRotationCount.length === 0 || !handleWinRateDesc || !handleShowRateDesc)
     return <Text>ローテーションのデータがみつかりませんでした</Text>;

@@ -4,7 +4,7 @@ import { TableRow } from "./TableRow";
 import { SearchHorseNumCountQuery } from "../../../apollo/graphql";
 import { getWakuNumberStyleArray, WakuNumberStyle } from "../../constants";
 import { useHorseNumCountWinShowRateOrder } from "../../../hooks/useHorseNumCountWinShowRateOrder";
-import { TableLoading } from "../../Loading";
+import { IndicatorLoading } from "../../Loading";
 import { TableHeader } from "../TableHeader";
 import { HORSE_NUM_COLUMNS } from "./constants";
 
@@ -50,7 +50,7 @@ const Container: React.FC<RecieveProps> = ({ raceName, ...props }) => {
     handleWinRateDesc,
     handleShowRateDesc,
   } = useHorseNumCountWinShowRateOrder(raceName);
-  if (loading) return <TableLoading />;
+  if (loading) return <IndicatorLoading style={{ marginTop: 32, size: 60 }} />;
   if (error) return <Text>エラーが発生しました</Text>;
   if (
     !sortedSearchRaceHorseNumCount ||

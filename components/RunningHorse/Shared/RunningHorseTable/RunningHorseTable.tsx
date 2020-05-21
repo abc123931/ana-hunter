@@ -2,7 +2,7 @@ import React from "react";
 import { StyleSheet, View, Text } from "react-native";
 import { TableMain } from "./TableMain";
 import { useSearchRunningHorsesQuery, SearchRunningHorsesQuery } from "../../../../apollo/graphql";
-import { TableLoading } from "../../../Loading";
+import { IndicatorLoading } from "../../../Loading";
 
 type RecieveProps = {
   raceName: string;
@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
 
 const Container: React.FC<RecieveProps> = ({ raceName, raceDay, ...props }) => {
   const { data, loading, error } = useSearchRunningHorsesQuery({ variables: { name: raceName, day: raceDay } });
-  if (loading) return <TableLoading />;
+  if (loading) return <IndicatorLoading style={{ marginTop: 32, size: 60 }} />;
   if (error) return <Text>エラーが発生しました</Text>;
   if (!data || data.searchRunningHorses.length === 0) return <Text>データが見つかりませんでした</Text>;
 

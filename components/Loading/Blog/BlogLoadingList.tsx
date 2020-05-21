@@ -6,7 +6,7 @@ type RecieveProps = {};
 type ContainerCreatedProps = {};
 type Props = Omit<RecieveProps & ContainerCreatedProps, "">;
 
-const datas = Array(5)
+const datas = Array(10)
   .fill(0)
   .map((_, i) => i + 1);
 
