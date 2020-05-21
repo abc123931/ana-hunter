@@ -2,6 +2,7 @@ import React from "react";
 import { StyleSheet, View, Text } from "react-native";
 import { SearchHorseNumCountQuery } from "../../../apollo/graphql";
 import { WakuNumberStyle } from "../../constants";
+import { HORSE_NUM_COLUMNS } from "./constants";
 
 type RecieveProps = {
   data: SearchHorseNumCountQuery["searchRaceHorseNumCount"][number];
@@ -17,15 +18,15 @@ type Props = Omit<RecieveProps & ContainerCreatedProps, "wakuNumberStyle">;
 
 const Component: React.FC<Props> = ({ color, backgroundColor, data, winRate, showRate, ..._props }) => (
   <View style={styles.container}>
-    <View style={{ ...styles.horseNum, backgroundColor }}>
+    <View style={{ ...styles.firstColumn, ...HORSE_NUM_COLUMNS.firstColumn.style, backgroundColor }}>
       <Text style={{ color, ...styles.column }}>{data.horseNum}</Text>
     </View>
-    <Text style={styles.column}>{data.firstCount}</Text>
-    <Text style={styles.column}>{data.secondCount}</Text>
-    <Text style={styles.column}>{data.thirdCount}</Text>
-    <Text style={styles.column}>{data.outCount}</Text>
-    <Text style={styles.column}>{winRate}%</Text>
-    <Text style={styles.column}>{showRate}%</Text>
+    <Text style={{ ...styles.column, ...HORSE_NUM_COLUMNS.firstCount.style }}>{data.firstCount}</Text>
+    <Text style={{ ...styles.column, ...HORSE_NUM_COLUMNS.firstCount.style }}>{data.secondCount}</Text>
+    <Text style={{ ...styles.column, ...HORSE_NUM_COLUMNS.firstCount.style }}>{data.thirdCount}</Text>
+    <Text style={{ ...styles.column, ...HORSE_NUM_COLUMNS.firstCount.style }}>{data.outCount}</Text>
+    <Text style={{ ...styles.column, ...HORSE_NUM_COLUMNS.firstCount.style }}>{winRate}%</Text>
+    <Text style={{ ...styles.column, ...HORSE_NUM_COLUMNS.firstCount.style }}>{showRate}%</Text>
   </View>
 );
 
@@ -36,12 +37,10 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  horseNum: {
-    flex: 1,
+  firstColumn: {
     justifyContent: "center",
   },
   column: {
-    flex: 1,
     paddingTop: 10,
     paddingBottom: 10,
     textAlign: "center",
