@@ -25,7 +25,7 @@ const Component: React.FC<Props> = ({ searchRotationCount, handleWinRateDesc, ha
       handleShowRateDesc={handleShowRateDesc}
     />
     {searchRotationCount.map((data, index) => (
-      <TableRow key={index} data={data} backgroundColor={index % 2 !== 0 ? "#f5e6e6" : ""} />
+      <TableRow key={index} data={data} backgroundColor={index % 2 !== 0 ? "#f7f9fa" : ""} />
     ))}
   </View>
 );
