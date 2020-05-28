@@ -17895,6 +17895,20 @@ export type SearchRunningHorsesQuery = { __typename?: "query_root" } & {
   >;
 };
 
+export type SearchHorsesQueryVariables = {
+  like: Scalars["String"];
+};
+
+export type SearchHorsesQuery = { __typename?: "query_root" } & {
+  horses: Array<
+    { __typename?: "horses" } & Pick<Horses, "birthday"> & {
+        horseID: Horses["pedigree_register"];
+        horseName: Horses["horse_name"];
+        sexCode: Horses["sex_code"];
+      }
+  >;
+};
+
 export const BlogFieldFragmentDoc = gql`
   fragment BlogField on blogs {
     author
@@ -18153,3 +18167,46 @@ export type SearchRunningHorsesQueryResult = ApolloReactCommon.QueryResult<
   SearchRunningHorsesQuery,
   SearchRunningHorsesQueryVariables
 >;
+export const SearchHorsesDocument = gql`
+  query SearchHorses($like: String!) {
+    horses(where: { horse_name: { _like: $like } }) {
+      horseID: pedigree_register
+      horseName: horse_name
+      sexCode: sex_code
+      birthday
+    }
+  }
+`;
+
+/**
+ * __useSearchHorsesQuery__
+ *
+ * To run a query within a React component, call `useSearchHorsesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useSearchHorsesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useSearchHorsesQuery({
+ *   variables: {
+ *      like: // value for 'like'
+ *   },
+ * });
+ */
+export function useSearchHorsesQuery(
+  baseOptions?: ApolloReactHooks.QueryHookOptions<SearchHorsesQuery, SearchHorsesQueryVariables>
+) {
+  return ApolloReactHooks.useQuery<SearchHorsesQuery, SearchHorsesQueryVariables>(SearchHorsesDocument, baseOptions);
+}
+export function useSearchHorsesLazyQuery(
+  baseOptions?: ApolloReactHooks.LazyQueryHookOptions<SearchHorsesQuery, SearchHorsesQueryVariables>
+) {
+  return ApolloReactHooks.useLazyQuery<SearchHorsesQuery, SearchHorsesQueryVariables>(
+    SearchHorsesDocument,
+    baseOptions
+  );
+}
+export type SearchHorsesQueryHookResult = ReturnType<typeof useSearchHorsesQuery>;
+export type SearchHorsesLazyQueryHookResult = ReturnType<typeof useSearchHorsesLazyQuery>;
+export type SearchHorsesQueryResult = ApolloReactCommon.QueryResult<SearchHorsesQuery, SearchHorsesQueryVariables>;

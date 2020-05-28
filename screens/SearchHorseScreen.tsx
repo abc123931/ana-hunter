@@ -1,7 +1,8 @@
 import React from "react";
-import { SafeAreaView, Text } from "react-native";
+import { SafeAreaView } from "react-native";
 import { Header } from "../components/Header";
 import { TabScreenSafeAreaViewStyle } from "../styles";
+import { SearchPage } from "../components/Horse/SearchPage";
 
 type RecieveProps = {};
 type ContainerCreatedProps = {};
@@ -10,7 +11,7 @@ type Props = Omit<RecieveProps & ContainerCreatedProps, "">;
 const Component: React.FC<Props> = ({ ..._props }) => (
   <SafeAreaView style={TabScreenSafeAreaViewStyle.container}>
     <Header />
-    <Text>うま画面</Text>
+    <SearchPage />
   </SafeAreaView>
 );
 

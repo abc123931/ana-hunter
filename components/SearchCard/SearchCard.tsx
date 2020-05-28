@@ -23,7 +23,7 @@ const Component: React.FC<Props> = ({ data, style, ..._props }) => (
 
 const styles = StyleSheet.create({
   container: {
-    flex: 6,
+    display: "flex",
     flexDirection: "row",
     paddingTop: 8,
     paddingBottom: 8,
