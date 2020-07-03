@@ -5,5 +5,15 @@ import SearchRaceScreen from "./SearchRaceScreen";
 import RunningHorseScreen from "./RunningHorseScreen";
 import BlogWebScreen from "./BlogWebScreen";
 import RaceScreen from "./RaceScreen";
+import { HorseScreen } from "./HorseScreen";
 
-export { HomeScreen, BlogScreen, SearchHorseScreen, SearchRaceScreen, RunningHorseScreen, BlogWebScreen, RaceScreen };
+export {
+  HomeScreen,
+  BlogScreen,
+  SearchHorseScreen,
+  SearchRaceScreen,
+  RunningHorseScreen,
+  BlogWebScreen,
+  RaceScreen,
+  HorseScreen,
+};

@@ -1,6 +1,8 @@
 export const DUMMY_IMAGE =
   "https://3.bp.blogspot.com/-DVHqPcbR9fA/VkxMAs3sgsI/AAAAAAAA0ss/ofdmv2PEXWo/s800/sports_keiba.png";
 
+export const DUMMY_HORSE_IMAGE = "https://pbs.twimg.com/profile_images/669132666583711744/wuVgZpnS_400x400.jpg";
+
 export type WakuNumberStyle = {
   backgroundColor: string;
   color: string;

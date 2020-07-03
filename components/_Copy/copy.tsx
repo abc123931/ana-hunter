@@ -15,8 +15,6 @@ const styles = StyleSheet.create({
   container: {},
 });
 
-const Container: React.FC<RecieveProps> = ({ ...props }) => {
+export const CopyComponent: React.FC<RecieveProps> = ({ ...props }) => {
   return <Component {...props} />;
 };
-
-export default Container;

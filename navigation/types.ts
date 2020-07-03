@@ -2,6 +2,7 @@ export type HomeStackParamList = {
   Home: undefined;
   RunningHorse: { raceName: string; raceDay: string };
   Race: { raceName: string };
+  Horse: { horseID: string };
 };
 
 export type BlogStackParamList = {

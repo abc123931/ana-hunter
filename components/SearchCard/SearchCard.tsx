@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import { CircleImage } from "../CircleImage";
 import { defaultImage, SearchCardData } from "./types";
 
@@ -7,18 +7,19 @@ type RecieveProps = {
   style?: any;
   data: SearchCardData;
   genre: string;
+  onPress?: () => void;
 };
 type ContainerCreatedProps = {};
 type Props = Omit<RecieveProps & ContainerCreatedProps, "">;
 
-const Component: React.FC<Props> = ({ data, style, ..._props }) => (
-  <View style={{ ...styles.container, ...style }}>
+const Component: React.FC<Props> = ({ data, style, onPress, ..._props }) => (
+  <TouchableOpacity style={{ ...styles.container, ...style }} onPress={onPress}>
     <CircleImage uri={defaultImage} style={styles.image} />
     <View style={styles.nameSupplementContainer}>
       <Text style={styles.name}>{data.name}</Text>
       <Text style={styles.supplement}>{data.supplement}</Text>
     </View>
-  </View>
+  </TouchableOpacity>
 );
 
 const styles = StyleSheet.create({
