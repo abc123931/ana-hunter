@@ -1,6 +1,8 @@
 import React from "react";
-import AppNavigator from "./navigation/AppNavigator";
+import { RecoilRoot } from "recoil";
 import { ApolloClient, HttpLink, InMemoryCache, ApolloProvider } from "@apollo/client";
+import AppNavigator from "./navigation/AppNavigator";
+
 import dayjs from "dayjs";
 import "dayjs/locale/ja";
 dayjs.locale("ja");
@@ -22,7 +24,9 @@ const client = createApolloClient();
 
 const App = () => (
   <ApolloProvider client={client}>
-    <AppNavigator />
+    <RecoilRoot>
+      <AppNavigator />
+    </RecoilRoot>
   </ApolloProvider>
 );
 

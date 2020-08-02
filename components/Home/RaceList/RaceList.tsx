@@ -1,8 +1,9 @@
 import React, { useCallback } from "react";
 import { Text, ScrollView, RefreshControl } from "react-native";
-import { useGetWeekendRacesQuery, GetWeekendRacesQuery } from "../../../apollo/graphql";
+import { GetWeekendRacesQuery } from "../../../apollo/graphql";
 import { RaceCard } from "./RaceCard";
 import { HomeRaceCardLoading } from "../../Loading";
+import { useGetWeekendRaces, mutateGetWeekendRaces } from "../../../hooks/swr/useGetWeekendRaces";
 
 type RecieveProps = {};
 type ContainerCreatedProps = {
@@ -22,15 +23,15 @@ const Component: React.FC<Props> = ({ races, refreshing, onRefresh, ..._props })
 
 const Container: React.FC<RecieveProps> = ({ ...props }) => {
   const [refreshing, setRefreshing] = React.useState<boolean>(false);
-  const { data, loading, error, refetch } = useGetWeekendRacesQuery();
+  const { data, error } = useGetWeekendRaces();
   const onRefresh = useCallback(async () => {
     setRefreshing(true);
-    await refetch();
+    mutateGetWeekendRaces();
     setRefreshing(false);
-  }, [refetch]);
-  if (loading) return <HomeRaceCardLoading />;
+  }, []);
+  if (!data) return <HomeRaceCardLoading />;
   if (error) return <Text>エラーが発生しました。</Text>;
-  if (!data || data?.races.length === 0) return <Text>レースが見つかりませんでした。</Text>;
+  if (data?.races.length === 0) return <Text>レースが見つかりませんでした。</Text>;
   return <Component races={data.races} refreshing={refreshing} onRefresh={onRefresh} {...props} />;
 };
 

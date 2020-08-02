@@ -1,0 +1,1987 @@
+schema {
+  query: query_root
+  subscription: subscription_root
+}
+
+scalar bigint
+
+"""
+expression to compare columns of type bigint. All fields are combined with logical 'AND'.
+"""
+input bigint_comparison_exp {
+  _eq: bigint
+  _gt: bigint
+  _gte: bigint
+  _in: [bigint!]
+  _is_null: Boolean
+  _lt: bigint
+  _lte: bigint
+  _neq: bigint
+  _nin: [bigint!]
+}
+
+"""
+columns and relationships of "blogs"
+"""
+type blogs {
+  author: String
+  createdAt: timestamptz!
+  id: uuid!
+  image: String
+  summary: String
+  title: String!
+  updatedAt: timestamptz!
+  url: String!
+}
+
+"""
+Boolean expression to filter rows from the table "blogs". All fields are combined with a logical 'AND'.
+"""
+input blogs_bool_exp {
+  _and: [blogs_bool_exp]
+  _not: blogs_bool_exp
+  _or: [blogs_bool_exp]
+  author: String_comparison_exp
+  createdAt: timestamptz_comparison_exp
+  id: uuid_comparison_exp
+  image: String_comparison_exp
+  summary: String_comparison_exp
+  title: String_comparison_exp
+  updatedAt: timestamptz_comparison_exp
+  url: String_comparison_exp
+}
+
+"""
+ordering options when selecting data from "blogs"
+"""
+input blogs_order_by {
+  author: order_by
+  createdAt: order_by
+  id: order_by
+  image: order_by
+  summary: order_by
+  title: order_by
+  updatedAt: order_by
+  url: order_by
+}
+
+"""
+primary key columns input for table: "blogs"
+"""
+input blogs_pk_columns_input {
+  id: uuid!
+}
+
+"""
+select columns of table "blogs"
+"""
+enum blogs_select_column {
+  """column name"""
+  author
+
+  """column name"""
+  createdAt
+
+  """column name"""
+  id
+
+  """column name"""
+  image
+
+  """column name"""
+  summary
+
+  """column name"""
+  title
+
+  """column name"""
+  updatedAt
+
+  """column name"""
+  url
+}
+
+"""
+expression to compare columns of type Float. All fields are combined with logical 'AND'.
+"""
+input Float_comparison_exp {
+  _eq: Float
+  _gt: Float
+  _gte: Float
+  _in: [Float!]
+  _is_null: Boolean
+  _lt: Float
+  _lte: Float
+  _neq: Float
+  _nin: [Float!]
+}
+
+"""
+レースごとの馬番成績
+
+
+columns and relationships of "horse_num_count"
+
+"""
+type horse_num_count {
+  common_race_name: String!
+  first_count: bigint!
+  horse_num: Int!
+  out_count: bigint!
+  second_count: bigint!
+  third_count: bigint!
+  total_count: bigint!
+}
+
+"""
+Boolean expression to filter rows from the table "horse_num_count". All fields are combined with a logical 'AND'.
+"""
+input horse_num_count_bool_exp {
+  _and: [horse_num_count_bool_exp]
+  _not: horse_num_count_bool_exp
+  _or: [horse_num_count_bool_exp]
+  common_race_name: String_comparison_exp
+  first_count: bigint_comparison_exp
+  horse_num: Int_comparison_exp
+  out_count: bigint_comparison_exp
+  second_count: bigint_comparison_exp
+  third_count: bigint_comparison_exp
+  total_count: bigint_comparison_exp
+}
+
+"""
+ordering options when selecting data from "horse_num_count"
+"""
+input horse_num_count_order_by {
+  common_race_name: order_by
+  first_count: order_by
+  horse_num: order_by
+  out_count: order_by
+  second_count: order_by
+  third_count: order_by
+  total_count: order_by
+}
+
+"""
+primary key columns input for table: "horse_num_count"
+"""
+input horse_num_count_pk_columns_input {
+  common_race_name: String!
+}
+
+"""
+select columns of table "horse_num_count"
+"""
+enum horse_num_count_select_column {
+  """column name"""
+  common_race_name
+
+  """column name"""
+  first_count
+
+  """column name"""
+  horse_num
+
+  """column name"""
+  out_count
+
+  """column name"""
+  second_count
+
+  """column name"""
+  third_count
+
+  """column name"""
+  total_count
+}
+
+"""
+columns and relationships of "horses"
+"""
+type horses {
+  birthday: String
+  coat_color_code: Int
+  data_date: String
+  father_birthday: String
+  father_horse_name: String
+  father_lineage_code: Int
+  horse_name: String
+  horse_sign_code: Int
+  mother_birthday: String
+  mother_father_birthday: String
+  mother_father_horse_name: String
+  mother_father_lineage_code: Int
+  mother_horse_name: String
+  owner_group_code: Int
+  owner_name: String
+  pedigree_register: String!
+  producer_name: String
+  production_place_name: String
+  register_delete_flag: Int
+  sex_code: Int
+}
+
+"""
+Boolean expression to filter rows from the table "horses". All fields are combined with a logical 'AND'.
+"""
+input horses_bool_exp {
+  _and: [horses_bool_exp]
+  _not: horses_bool_exp
+  _or: [horses_bool_exp]
+  birthday: String_comparison_exp
+  coat_color_code: Int_comparison_exp
+  data_date: String_comparison_exp
+  father_birthday: String_comparison_exp
+  father_horse_name: String_comparison_exp
+  father_lineage_code: Int_comparison_exp
+  horse_name: String_comparison_exp
+  horse_sign_code: Int_comparison_exp
+  mother_birthday: String_comparison_exp
+  mother_father_birthday: String_comparison_exp
+  mother_father_horse_name: String_comparison_exp
+  mother_father_lineage_code: Int_comparison_exp
+  mother_horse_name: String_comparison_exp
+  owner_group_code: Int_comparison_exp
+  owner_name: String_comparison_exp
+  pedigree_register: String_comparison_exp
+  producer_name: String_comparison_exp
+  production_place_name: String_comparison_exp
+  register_delete_flag: Int_comparison_exp
+  sex_code: Int_comparison_exp
+}
+
+"""
+ordering options when selecting data from "horses"
+"""
+input horses_order_by {
+  birthday: order_by
+  coat_color_code: order_by
+  data_date: order_by
+  father_birthday: order_by
+  father_horse_name: order_by
+  father_lineage_code: order_by
+  horse_name: order_by
+  horse_sign_code: order_by
+  mother_birthday: order_by
+  mother_father_birthday: order_by
+  mother_father_horse_name: order_by
+  mother_father_lineage_code: order_by
+  mother_horse_name: order_by
+  owner_group_code: order_by
+  owner_name: order_by
+  pedigree_register: order_by
+  producer_name: order_by
+  production_place_name: order_by
+  register_delete_flag: order_by
+  sex_code: order_by
+}
+
+"""
+primary key columns input for table: "horses"
+"""
+input horses_pk_columns_input {
+  pedigree_register: String!
+}
+
+"""
+select columns of table "horses"
+"""
+enum horses_select_column {
+  """column name"""
+  birthday
+
+  """column name"""
+  coat_color_code
+
+  """column name"""
+  data_date
+
+  """column name"""
+  father_birthday
+
+  """column name"""
+  father_horse_name
+
+  """column name"""
+  father_lineage_code
+
+  """column name"""
+  horse_name
+
+  """column name"""
+  horse_sign_code
+
+  """column name"""
+  mother_birthday
+
+  """column name"""
+  mother_father_birthday
+
+  """column name"""
+  mother_father_horse_name
+
+  """column name"""
+  mother_father_lineage_code
+
+  """column name"""
+  mother_horse_name
+
+  """column name"""
+  owner_group_code
+
+  """column name"""
+  owner_name
+
+  """column name"""
+  pedigree_register
+
+  """column name"""
+  producer_name
+
+  """column name"""
+  production_place_name
+
+  """column name"""
+  register_delete_flag
+
+  """column name"""
+  sex_code
+}
+
+"""
+expression to compare columns of type Int. All fields are combined with logical 'AND'.
+"""
+input Int_comparison_exp {
+  _eq: Int
+  _gt: Int
+  _gte: Int
+  _in: [Int!]
+  _is_null: Boolean
+  _lt: Int
+  _lte: Int
+  _neq: Int
+  _nin: [Int!]
+}
+
+"""column ordering options"""
+enum order_by {
+  """in the ascending order, nulls last"""
+  asc
+
+  """in the ascending order, nulls first"""
+  asc_nulls_first
+
+  """in the ascending order, nulls last"""
+  asc_nulls_last
+
+  """in the descending order, nulls first"""
+  desc
+
+  """in the descending order, nulls first"""
+  desc_nulls_first
+
+  """in the descending order, nulls last"""
+  desc_nulls_last
+}
+
+"""query root"""
+type query_root {
+  """fetch data from the table: "blogs" using primary key columns"""
+  blog(id: uuid!): blogs
+
+  """
+  fetch data from the table: "blogs"
+  """
+  blogs(
+    """distinct select on columns"""
+    distinct_on: [blogs_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [blogs_order_by!]
+
+    """filter the rows returned"""
+    where: blogs_bool_exp
+  ): [blogs!]!
+
+  """
+  fetch data from the table: "horse_num_count"
+  """
+  horse_num_count(
+    """distinct select on columns"""
+    distinct_on: [horse_num_count_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [horse_num_count_order_by!]
+
+    """filter the rows returned"""
+    where: horse_num_count_bool_exp
+  ): [horse_num_count!]!
+
+  """fetch data from the table: "horse_num_count" using primary key columns"""
+  horse_num_count_by_pk(common_race_name: String!): horse_num_count
+
+  """
+  fetch data from the table: "horses"
+  """
+  horses(
+    """distinct select on columns"""
+    distinct_on: [horses_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [horses_order_by!]
+
+    """filter the rows returned"""
+    where: horses_bool_exp
+  ): [horses!]!
+
+  """fetch data from the table: "horses" using primary key columns"""
+  horses_by_pk(pedigree_register: String!): horses
+
+  """
+  fetch data from the table: "races"
+  """
+  races(
+    """distinct select on columns"""
+    distinct_on: [races_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [races_order_by!]
+
+    """filter the rows returned"""
+    where: races_bool_exp
+  ): [races!]!
+
+  """fetch data from the table: "races" using primary key columns"""
+  races_by_pk(race_key: String!): races
+
+  """
+  fetch data from the table: "realtimehorses"
+  """
+  realtimehorses(
+    """distinct select on columns"""
+    distinct_on: [realtimehorses_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [realtimehorses_order_by!]
+
+    """filter the rows returned"""
+    where: realtimehorses_bool_exp
+  ): [realtimehorses!]!
+
+  """fetch data from the table: "realtimehorses" using primary key columns"""
+  realtimehorses_by_pk(realtimehorse_id: String!): realtimehorses
+
+  """
+  fetch data from the table: "rotation_result"
+  """
+  rotation_result(
+    """distinct select on columns"""
+    distinct_on: [rotation_result_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [rotation_result_order_by!]
+
+    """filter the rows returned"""
+    where: rotation_result_bool_exp
+  ): [rotation_result!]!
+
+  """fetch data from the table: "rotation_result" using primary key columns"""
+  rotation_result_by_pk(common_race_name: String!): rotation_result
+
+  """
+  fetch data from the table: "running_horses"
+  """
+  running_horses(
+    """distinct select on columns"""
+    distinct_on: [running_horses_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [running_horses_order_by!]
+
+    """filter the rows returned"""
+    where: running_horses_bool_exp
+  ): [running_horses!]!
+
+  """fetch data from the table: "running_horses" using primary key columns"""
+  running_horses_by_pk(race_key: String!): running_horses
+
+  """
+  execute function "search_race_horse_num_count" which returns "horse_num_count"
+  """
+  search_race_horse_num_count(
+    """
+    input parameters for function "search_race_horse_num_count"
+    """
+    args: search_race_horse_num_count_args!
+
+    """distinct select on columns"""
+    distinct_on: [horse_num_count_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [horse_num_count_order_by!]
+
+    """filter the rows returned"""
+    where: horse_num_count_bool_exp
+  ): [horse_num_count!]!
+
+  """
+  execute function "search_rotation_count" which returns "rotation_result"
+  """
+  search_rotation_count(
+    """
+    input parameters for function "search_rotation_count"
+    """
+    args: search_rotation_count_args!
+
+    """distinct select on columns"""
+    distinct_on: [rotation_result_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [rotation_result_order_by!]
+
+    """filter the rows returned"""
+    where: rotation_result_bool_exp
+  ): [rotation_result!]!
+
+  """
+  execute function "search_running_horses" which returns "running_horses"
+  """
+  search_running_horses(
+    """
+    input parameters for function "search_running_horses"
+    """
+    args: search_running_horses_args!
+
+    """distinct select on columns"""
+    distinct_on: [running_horses_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [running_horses_order_by!]
+
+    """filter the rows returned"""
+    where: running_horses_bool_exp
+  ): [running_horses!]!
+}
+
+"""
+columns and relationships of "races"
+"""
+type races {
+  course: String
+  data_partition: String
+  distance: Int
+  fifth_prize: Int
+  first_budget_cash_prize: Int
+  first_prize: Int
+  forth_prize: Int
+  head_count: Int
+  holding_key: String
+  holding_partition: String
+  in_out: Int
+  place_code: Int
+  race_condition: String
+  race_count: String
+  race_day: String
+  race_grade: Int
+  race_key: String!
+  race_name: String
+  race_name_aka: String
+  race_name_common: String
+  race_sign: String
+  race_time: String
+  race_type: Int
+  race_weight: Int
+
+  """An array relationship"""
+  realtimehorses(
+    """distinct select on columns"""
+    distinct_on: [realtimehorses_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [realtimehorses_order_by!]
+
+    """filter the rows returned"""
+    where: realtimehorses_bool_exp
+  ): [realtimehorses!]!
+  right_left: Int
+  second_budget_cash_prize: Int
+  second_prize: Int
+  third_prize: Int
+  track_type_code: Int
+}
+
+"""
+Boolean expression to filter rows from the table "races". All fields are combined with a logical 'AND'.
+"""
+input races_bool_exp {
+  _and: [races_bool_exp]
+  _not: races_bool_exp
+  _or: [races_bool_exp]
+  course: String_comparison_exp
+  data_partition: String_comparison_exp
+  distance: Int_comparison_exp
+  fifth_prize: Int_comparison_exp
+  first_budget_cash_prize: Int_comparison_exp
+  first_prize: Int_comparison_exp
+  forth_prize: Int_comparison_exp
+  head_count: Int_comparison_exp
+  holding_key: String_comparison_exp
+  holding_partition: String_comparison_exp
+  in_out: Int_comparison_exp
+  place_code: Int_comparison_exp
+  race_condition: String_comparison_exp
+  race_count: String_comparison_exp
+  race_day: String_comparison_exp
+  race_grade: Int_comparison_exp
+  race_key: String_comparison_exp
+  race_name: String_comparison_exp
+  race_name_aka: String_comparison_exp
+  race_name_common: String_comparison_exp
+  race_sign: String_comparison_exp
+  race_time: String_comparison_exp
+  race_type: Int_comparison_exp
+  race_weight: Int_comparison_exp
+  realtimehorses: realtimehorses_bool_exp
+  right_left: Int_comparison_exp
+  second_budget_cash_prize: Int_comparison_exp
+  second_prize: Int_comparison_exp
+  third_prize: Int_comparison_exp
+  track_type_code: Int_comparison_exp
+}
+
+"""
+ordering options when selecting data from "races"
+"""
+input races_order_by {
+  course: order_by
+  data_partition: order_by
+  distance: order_by
+  fifth_prize: order_by
+  first_budget_cash_prize: order_by
+  first_prize: order_by
+  forth_prize: order_by
+  head_count: order_by
+  holding_key: order_by
+  holding_partition: order_by
+  in_out: order_by
+  place_code: order_by
+  race_condition: order_by
+  race_count: order_by
+  race_day: order_by
+  race_grade: order_by
+  race_key: order_by
+  race_name: order_by
+  race_name_aka: order_by
+  race_name_common: order_by
+  race_sign: order_by
+  race_time: order_by
+  race_type: order_by
+  race_weight: order_by
+  right_left: order_by
+  second_budget_cash_prize: order_by
+  second_prize: order_by
+  third_prize: order_by
+  track_type_code: order_by
+}
+
+"""
+primary key columns input for table: "races"
+"""
+input races_pk_columns_input {
+  race_key: String!
+}
+
+"""
+select columns of table "races"
+"""
+enum races_select_column {
+  """column name"""
+  course
+
+  """column name"""
+  data_partition
+
+  """column name"""
+  distance
+
+  """column name"""
+  fifth_prize
+
+  """column name"""
+  first_budget_cash_prize
+
+  """column name"""
+  first_prize
+
+  """column name"""
+  forth_prize
+
+  """column name"""
+  head_count
+
+  """column name"""
+  holding_key
+
+  """column name"""
+  holding_partition
+
+  """column name"""
+  in_out
+
+  """column name"""
+  place_code
+
+  """column name"""
+  race_condition
+
+  """column name"""
+  race_count
+
+  """column name"""
+  race_day
+
+  """column name"""
+  race_grade
+
+  """column name"""
+  race_key
+
+  """column name"""
+  race_name
+
+  """column name"""
+  race_name_aka
+
+  """column name"""
+  race_name_common
+
+  """column name"""
+  race_sign
+
+  """column name"""
+  race_time
+
+  """column name"""
+  race_type
+
+  """column name"""
+  race_weight
+
+  """column name"""
+  right_left
+
+  """column name"""
+  second_budget_cash_prize
+
+  """column name"""
+  second_prize
+
+  """column name"""
+  third_prize
+
+  """column name"""
+  track_type_code
+}
+
+"""
+columns and relationships of "realtimehorses"
+"""
+type realtimehorses {
+  after_three_f_diff: Int
+  after_three_f_in_out: Int
+  after_three_f_rank: Int
+  apprentice_class: Int
+  basis_weight: Int
+  blinker: Int
+  body_type: String
+  body_type_total_one: String
+  body_type_total_three: String
+  body_type_total_two: String
+  border_num: Int
+  cancel_flag: Int
+  class_code: Int
+  condition_class: Int
+  dart_suitability_code: Int
+  day_entrance: String
+  day_num_from_entrance: Int
+  degree_flag: Int
+  distance_aptitude: Int
+  distance_aptitude_two: String
+  expansion_symbol: String
+  flag: String
+  goal_diff: Int
+  goal_in_out: Int
+  goal_rank: Int
+  grazing_destination: String
+  grazing_destination_rank: String
+  heavy_aptitude_code: Int
+  hoof_code: Int
+  horse_name: String
+  horse_num: Int
+  horse_sign_code: String
+  horse_slow_start_rate: Float
+  horse_special_mention_one: String
+  horse_special_mention_three: String
+  horse_special_mention_two: String
+  horse_start_index: Float
+  idm: Float
+  idm_sign: Int
+  in_out_way: Int
+  income_prize: Int
+  info_index: Float
+  info_sign: Int
+  jockey_code: Int
+  jockey_ex_co_rate: Float
+  jockey_expec_three_rid_rate: Float
+  jockey_expec_v_rate: Float
+  jockey_index: Float
+  jockey_sign: Int
+  leg_quality: Int
+  ls_index_rank: Int
+  multi_win_odds: Float
+  multi_win_popularity: Int
+  odds: Float
+  owner_group_code: Int
+  owner_name: String
+  pace_forecast: String
+  pace_index: Float
+  pace_index_rank: Int
+  pedigree_register: String
+  popularity: Int
+  popularity_index: Int
+  position_index: Float
+  position_index_rank: Int
+  race_key: String
+  realtimehorse_id: String!
+  rest_reason_code: String
+  rising_degree: Int
+  rising_index: Float
+  rising_index_rank: Int
+  rotation: Int
+  run_num_from_entrance: Int
+  run_type: String
+  rushing_index: Int
+  rushing_rank: Int
+  rushing_sign: Int
+  rushing_type: String
+  sex_code: Int
+  specific_info_bt: Int
+  specific_info_bu: Int
+  specific_info_c: Int
+  specific_info_dc: Int
+  specific_info_t: Int
+  stable_eval_code: Int
+  stable_index: Float
+  stable_rank: Int
+  stable_sign: Int
+  ten_index: Float
+  ten_index_rank: Int
+  ticket_index: Int
+  ticket_sign: Int
+  total_info_bt: Int
+  total_info_bu: Int
+  total_info_c: Int
+  total_info_dc: Int
+  total_info_t: Int
+  total_sign: Int
+  train_allow_code: Int
+  train_index: Float
+  train_sign: Int
+  trainer_code: Int
+  transport_class: String
+  turf_suitability_code: Int
+  way_diff: Int
+  way_order: Int
+  weight_confirm: Int
+  weight_confirm_inc_dec: String
+  winning_prize: Int
+}
+
+"""
+Boolean expression to filter rows from the table "realtimehorses". All fields are combined with a logical 'AND'.
+"""
+input realtimehorses_bool_exp {
+  _and: [realtimehorses_bool_exp]
+  _not: realtimehorses_bool_exp
+  _or: [realtimehorses_bool_exp]
+  after_three_f_diff: Int_comparison_exp
+  after_three_f_in_out: Int_comparison_exp
+  after_three_f_rank: Int_comparison_exp
+  apprentice_class: Int_comparison_exp
+  basis_weight: Int_comparison_exp
+  blinker: Int_comparison_exp
+  body_type: String_comparison_exp
+  body_type_total_one: String_comparison_exp
+  body_type_total_three: String_comparison_exp
+  body_type_total_two: String_comparison_exp
+  border_num: Int_comparison_exp
+  cancel_flag: Int_comparison_exp
+  class_code: Int_comparison_exp
+  condition_class: Int_comparison_exp
+  dart_suitability_code: Int_comparison_exp
+  day_entrance: String_comparison_exp
+  day_num_from_entrance: Int_comparison_exp
+  degree_flag: Int_comparison_exp
+  distance_aptitude: Int_comparison_exp
+  distance_aptitude_two: String_comparison_exp
+  expansion_symbol: String_comparison_exp
+  flag: String_comparison_exp
+  goal_diff: Int_comparison_exp
+  goal_in_out: Int_comparison_exp
+  goal_rank: Int_comparison_exp
+  grazing_destination: String_comparison_exp
+  grazing_destination_rank: String_comparison_exp
+  heavy_aptitude_code: Int_comparison_exp
+  hoof_code: Int_comparison_exp
+  horse_name: String_comparison_exp
+  horse_num: Int_comparison_exp
+  horse_sign_code: String_comparison_exp
+  horse_slow_start_rate: Float_comparison_exp
+  horse_special_mention_one: String_comparison_exp
+  horse_special_mention_three: String_comparison_exp
+  horse_special_mention_two: String_comparison_exp
+  horse_start_index: Float_comparison_exp
+  idm: Float_comparison_exp
+  idm_sign: Int_comparison_exp
+  in_out_way: Int_comparison_exp
+  income_prize: Int_comparison_exp
+  info_index: Float_comparison_exp
+  info_sign: Int_comparison_exp
+  jockey_code: Int_comparison_exp
+  jockey_ex_co_rate: Float_comparison_exp
+  jockey_expec_three_rid_rate: Float_comparison_exp
+  jockey_expec_v_rate: Float_comparison_exp
+  jockey_index: Float_comparison_exp
+  jockey_sign: Int_comparison_exp
+  leg_quality: Int_comparison_exp
+  ls_index_rank: Int_comparison_exp
+  multi_win_odds: Float_comparison_exp
+  multi_win_popularity: Int_comparison_exp
+  odds: Float_comparison_exp
+  owner_group_code: Int_comparison_exp
+  owner_name: String_comparison_exp
+  pace_forecast: String_comparison_exp
+  pace_index: Float_comparison_exp
+  pace_index_rank: Int_comparison_exp
+  pedigree_register: String_comparison_exp
+  popularity: Int_comparison_exp
+  popularity_index: Int_comparison_exp
+  position_index: Float_comparison_exp
+  position_index_rank: Int_comparison_exp
+  race_key: String_comparison_exp
+  realtimehorse_id: String_comparison_exp
+  rest_reason_code: String_comparison_exp
+  rising_degree: Int_comparison_exp
+  rising_index: Float_comparison_exp
+  rising_index_rank: Int_comparison_exp
+  rotation: Int_comparison_exp
+  run_num_from_entrance: Int_comparison_exp
+  run_type: String_comparison_exp
+  rushing_index: Int_comparison_exp
+  rushing_rank: Int_comparison_exp
+  rushing_sign: Int_comparison_exp
+  rushing_type: String_comparison_exp
+  sex_code: Int_comparison_exp
+  specific_info_bt: Int_comparison_exp
+  specific_info_bu: Int_comparison_exp
+  specific_info_c: Int_comparison_exp
+  specific_info_dc: Int_comparison_exp
+  specific_info_t: Int_comparison_exp
+  stable_eval_code: Int_comparison_exp
+  stable_index: Float_comparison_exp
+  stable_rank: Int_comparison_exp
+  stable_sign: Int_comparison_exp
+  ten_index: Float_comparison_exp
+  ten_index_rank: Int_comparison_exp
+  ticket_index: Int_comparison_exp
+  ticket_sign: Int_comparison_exp
+  total_info_bt: Int_comparison_exp
+  total_info_bu: Int_comparison_exp
+  total_info_c: Int_comparison_exp
+  total_info_dc: Int_comparison_exp
+  total_info_t: Int_comparison_exp
+  total_sign: Int_comparison_exp
+  train_allow_code: Int_comparison_exp
+  train_index: Float_comparison_exp
+  train_sign: Int_comparison_exp
+  trainer_code: Int_comparison_exp
+  transport_class: String_comparison_exp
+  turf_suitability_code: Int_comparison_exp
+  way_diff: Int_comparison_exp
+  way_order: Int_comparison_exp
+  weight_confirm: Int_comparison_exp
+  weight_confirm_inc_dec: String_comparison_exp
+  winning_prize: Int_comparison_exp
+}
+
+"""
+ordering options when selecting data from "realtimehorses"
+"""
+input realtimehorses_order_by {
+  after_three_f_diff: order_by
+  after_three_f_in_out: order_by
+  after_three_f_rank: order_by
+  apprentice_class: order_by
+  basis_weight: order_by
+  blinker: order_by
+  body_type: order_by
+  body_type_total_one: order_by
+  body_type_total_three: order_by
+  body_type_total_two: order_by
+  border_num: order_by
+  cancel_flag: order_by
+  class_code: order_by
+  condition_class: order_by
+  dart_suitability_code: order_by
+  day_entrance: order_by
+  day_num_from_entrance: order_by
+  degree_flag: order_by
+  distance_aptitude: order_by
+  distance_aptitude_two: order_by
+  expansion_symbol: order_by
+  flag: order_by
+  goal_diff: order_by
+  goal_in_out: order_by
+  goal_rank: order_by
+  grazing_destination: order_by
+  grazing_destination_rank: order_by
+  heavy_aptitude_code: order_by
+  hoof_code: order_by
+  horse_name: order_by
+  horse_num: order_by
+  horse_sign_code: order_by
+  horse_slow_start_rate: order_by
+  horse_special_mention_one: order_by
+  horse_special_mention_three: order_by
+  horse_special_mention_two: order_by
+  horse_start_index: order_by
+  idm: order_by
+  idm_sign: order_by
+  in_out_way: order_by
+  income_prize: order_by
+  info_index: order_by
+  info_sign: order_by
+  jockey_code: order_by
+  jockey_ex_co_rate: order_by
+  jockey_expec_three_rid_rate: order_by
+  jockey_expec_v_rate: order_by
+  jockey_index: order_by
+  jockey_sign: order_by
+  leg_quality: order_by
+  ls_index_rank: order_by
+  multi_win_odds: order_by
+  multi_win_popularity: order_by
+  odds: order_by
+  owner_group_code: order_by
+  owner_name: order_by
+  pace_forecast: order_by
+  pace_index: order_by
+  pace_index_rank: order_by
+  pedigree_register: order_by
+  popularity: order_by
+  popularity_index: order_by
+  position_index: order_by
+  position_index_rank: order_by
+  race_key: order_by
+  realtimehorse_id: order_by
+  rest_reason_code: order_by
+  rising_degree: order_by
+  rising_index: order_by
+  rising_index_rank: order_by
+  rotation: order_by
+  run_num_from_entrance: order_by
+  run_type: order_by
+  rushing_index: order_by
+  rushing_rank: order_by
+  rushing_sign: order_by
+  rushing_type: order_by
+  sex_code: order_by
+  specific_info_bt: order_by
+  specific_info_bu: order_by
+  specific_info_c: order_by
+  specific_info_dc: order_by
+  specific_info_t: order_by
+  stable_eval_code: order_by
+  stable_index: order_by
+  stable_rank: order_by
+  stable_sign: order_by
+  ten_index: order_by
+  ten_index_rank: order_by
+  ticket_index: order_by
+  ticket_sign: order_by
+  total_info_bt: order_by
+  total_info_bu: order_by
+  total_info_c: order_by
+  total_info_dc: order_by
+  total_info_t: order_by
+  total_sign: order_by
+  train_allow_code: order_by
+  train_index: order_by
+  train_sign: order_by
+  trainer_code: order_by
+  transport_class: order_by
+  turf_suitability_code: order_by
+  way_diff: order_by
+  way_order: order_by
+  weight_confirm: order_by
+  weight_confirm_inc_dec: order_by
+  winning_prize: order_by
+}
+
+"""
+primary key columns input for table: "realtimehorses"
+"""
+input realtimehorses_pk_columns_input {
+  realtimehorse_id: String!
+}
+
+"""
+select columns of table "realtimehorses"
+"""
+enum realtimehorses_select_column {
+  """column name"""
+  after_three_f_diff
+
+  """column name"""
+  after_three_f_in_out
+
+  """column name"""
+  after_three_f_rank
+
+  """column name"""
+  apprentice_class
+
+  """column name"""
+  basis_weight
+
+  """column name"""
+  blinker
+
+  """column name"""
+  body_type
+
+  """column name"""
+  body_type_total_one
+
+  """column name"""
+  body_type_total_three
+
+  """column name"""
+  body_type_total_two
+
+  """column name"""
+  border_num
+
+  """column name"""
+  cancel_flag
+
+  """column name"""
+  class_code
+
+  """column name"""
+  condition_class
+
+  """column name"""
+  dart_suitability_code
+
+  """column name"""
+  day_entrance
+
+  """column name"""
+  day_num_from_entrance
+
+  """column name"""
+  degree_flag
+
+  """column name"""
+  distance_aptitude
+
+  """column name"""
+  distance_aptitude_two
+
+  """column name"""
+  expansion_symbol
+
+  """column name"""
+  flag
+
+  """column name"""
+  goal_diff
+
+  """column name"""
+  goal_in_out
+
+  """column name"""
+  goal_rank
+
+  """column name"""
+  grazing_destination
+
+  """column name"""
+  grazing_destination_rank
+
+  """column name"""
+  heavy_aptitude_code
+
+  """column name"""
+  hoof_code
+
+  """column name"""
+  horse_name
+
+  """column name"""
+  horse_num
+
+  """column name"""
+  horse_sign_code
+
+  """column name"""
+  horse_slow_start_rate
+
+  """column name"""
+  horse_special_mention_one
+
+  """column name"""
+  horse_special_mention_three
+
+  """column name"""
+  horse_special_mention_two
+
+  """column name"""
+  horse_start_index
+
+  """column name"""
+  idm
+
+  """column name"""
+  idm_sign
+
+  """column name"""
+  in_out_way
+
+  """column name"""
+  income_prize
+
+  """column name"""
+  info_index
+
+  """column name"""
+  info_sign
+
+  """column name"""
+  jockey_code
+
+  """column name"""
+  jockey_ex_co_rate
+
+  """column name"""
+  jockey_expec_three_rid_rate
+
+  """column name"""
+  jockey_expec_v_rate
+
+  """column name"""
+  jockey_index
+
+  """column name"""
+  jockey_sign
+
+  """column name"""
+  leg_quality
+
+  """column name"""
+  ls_index_rank
+
+  """column name"""
+  multi_win_odds
+
+  """column name"""
+  multi_win_popularity
+
+  """column name"""
+  odds
+
+  """column name"""
+  owner_group_code
+
+  """column name"""
+  owner_name
+
+  """column name"""
+  pace_forecast
+
+  """column name"""
+  pace_index
+
+  """column name"""
+  pace_index_rank
+
+  """column name"""
+  pedigree_register
+
+  """column name"""
+  popularity
+
+  """column name"""
+  popularity_index
+
+  """column name"""
+  position_index
+
+  """column name"""
+  position_index_rank
+
+  """column name"""
+  race_key
+
+  """column name"""
+  realtimehorse_id
+
+  """column name"""
+  rest_reason_code
+
+  """column name"""
+  rising_degree
+
+  """column name"""
+  rising_index
+
+  """column name"""
+  rising_index_rank
+
+  """column name"""
+  rotation
+
+  """column name"""
+  run_num_from_entrance
+
+  """column name"""
+  run_type
+
+  """column name"""
+  rushing_index
+
+  """column name"""
+  rushing_rank
+
+  """column name"""
+  rushing_sign
+
+  """column name"""
+  rushing_type
+
+  """column name"""
+  sex_code
+
+  """column name"""
+  specific_info_bt
+
+  """column name"""
+  specific_info_bu
+
+  """column name"""
+  specific_info_c
+
+  """column name"""
+  specific_info_dc
+
+  """column name"""
+  specific_info_t
+
+  """column name"""
+  stable_eval_code
+
+  """column name"""
+  stable_index
+
+  """column name"""
+  stable_rank
+
+  """column name"""
+  stable_sign
+
+  """column name"""
+  ten_index
+
+  """column name"""
+  ten_index_rank
+
+  """column name"""
+  ticket_index
+
+  """column name"""
+  ticket_sign
+
+  """column name"""
+  total_info_bt
+
+  """column name"""
+  total_info_bu
+
+  """column name"""
+  total_info_c
+
+  """column name"""
+  total_info_dc
+
+  """column name"""
+  total_info_t
+
+  """column name"""
+  total_sign
+
+  """column name"""
+  train_allow_code
+
+  """column name"""
+  train_index
+
+  """column name"""
+  train_sign
+
+  """column name"""
+  trainer_code
+
+  """column name"""
+  transport_class
+
+  """column name"""
+  turf_suitability_code
+
+  """column name"""
+  way_diff
+
+  """column name"""
+  way_order
+
+  """column name"""
+  weight_confirm
+
+  """column name"""
+  weight_confirm_inc_dec
+
+  """column name"""
+  winning_prize
+}
+
+"""
+ローテーションviewのリザルトテーブル
+
+
+columns and relationships of "rotation_result"
+
+"""
+type rotation_result {
+  common_race_name: String!
+  first_count: bigint!
+  lag_common_race_name: String!
+  out_count: bigint!
+  second_count: bigint!
+  third_count: bigint!
+  total_count: bigint!
+}
+
+"""
+Boolean expression to filter rows from the table "rotation_result". All fields are combined with a logical 'AND'.
+"""
+input rotation_result_bool_exp {
+  _and: [rotation_result_bool_exp]
+  _not: rotation_result_bool_exp
+  _or: [rotation_result_bool_exp]
+  common_race_name: String_comparison_exp
+  first_count: bigint_comparison_exp
+  lag_common_race_name: String_comparison_exp
+  out_count: bigint_comparison_exp
+  second_count: bigint_comparison_exp
+  third_count: bigint_comparison_exp
+  total_count: bigint_comparison_exp
+}
+
+"""
+ordering options when selecting data from "rotation_result"
+"""
+input rotation_result_order_by {
+  common_race_name: order_by
+  first_count: order_by
+  lag_common_race_name: order_by
+  out_count: order_by
+  second_count: order_by
+  third_count: order_by
+  total_count: order_by
+}
+
+"""
+primary key columns input for table: "rotation_result"
+"""
+input rotation_result_pk_columns_input {
+  common_race_name: String!
+}
+
+"""
+select columns of table "rotation_result"
+"""
+enum rotation_result_select_column {
+  """column name"""
+  common_race_name
+
+  """column name"""
+  first_count
+
+  """column name"""
+  lag_common_race_name
+
+  """column name"""
+  out_count
+
+  """column name"""
+  second_count
+
+  """column name"""
+  third_count
+
+  """column name"""
+  total_count
+}
+
+"""
+columns and relationships of "running_horses"
+"""
+type running_horses {
+  common_race_name: String!
+  horse_name: String!
+  horse_num: Int!
+  new_total_index: Int!
+  popularity: Int!
+  race_key: String!
+}
+
+"""
+Boolean expression to filter rows from the table "running_horses". All fields are combined with a logical 'AND'.
+"""
+input running_horses_bool_exp {
+  _and: [running_horses_bool_exp]
+  _not: running_horses_bool_exp
+  _or: [running_horses_bool_exp]
+  common_race_name: String_comparison_exp
+  horse_name: String_comparison_exp
+  horse_num: Int_comparison_exp
+  new_total_index: Int_comparison_exp
+  popularity: Int_comparison_exp
+  race_key: String_comparison_exp
+}
+
+"""
+ordering options when selecting data from "running_horses"
+"""
+input running_horses_order_by {
+  common_race_name: order_by
+  horse_name: order_by
+  horse_num: order_by
+  new_total_index: order_by
+  popularity: order_by
+  race_key: order_by
+}
+
+"""
+primary key columns input for table: "running_horses"
+"""
+input running_horses_pk_columns_input {
+  race_key: String!
+}
+
+"""
+select columns of table "running_horses"
+"""
+enum running_horses_select_column {
+  """column name"""
+  common_race_name
+
+  """column name"""
+  horse_name
+
+  """column name"""
+  horse_num
+
+  """column name"""
+  new_total_index
+
+  """column name"""
+  popularity
+
+  """column name"""
+  race_key
+}
+
+input search_race_horse_num_count_args {
+  argname: String
+}
+
+input search_rotation_count_args {
+  argname: String
+}
+
+input search_running_horses_args {
+  argday: String
+  argname: String
+}
+
+"""
+expression to compare columns of type String. All fields are combined with logical 'AND'.
+"""
+input String_comparison_exp {
+  _eq: String
+  _gt: String
+  _gte: String
+  _ilike: String
+  _in: [String!]
+  _is_null: Boolean
+  _like: String
+  _lt: String
+  _lte: String
+  _neq: String
+  _nilike: String
+  _nin: [String!]
+  _nlike: String
+  _nsimilar: String
+  _similar: String
+}
+
+"""subscription root"""
+type subscription_root {
+  """fetch data from the table: "blogs" using primary key columns"""
+  blog(id: uuid!): blogs
+
+  """
+  fetch data from the table: "blogs"
+  """
+  blogs(
+    """distinct select on columns"""
+    distinct_on: [blogs_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [blogs_order_by!]
+
+    """filter the rows returned"""
+    where: blogs_bool_exp
+  ): [blogs!]!
+
+  """
+  fetch data from the table: "horse_num_count"
+  """
+  horse_num_count(
+    """distinct select on columns"""
+    distinct_on: [horse_num_count_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [horse_num_count_order_by!]
+
+    """filter the rows returned"""
+    where: horse_num_count_bool_exp
+  ): [horse_num_count!]!
+
+  """fetch data from the table: "horse_num_count" using primary key columns"""
+  horse_num_count_by_pk(common_race_name: String!): horse_num_count
+
+  """
+  fetch data from the table: "horses"
+  """
+  horses(
+    """distinct select on columns"""
+    distinct_on: [horses_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [horses_order_by!]
+
+    """filter the rows returned"""
+    where: horses_bool_exp
+  ): [horses!]!
+
+  """fetch data from the table: "horses" using primary key columns"""
+  horses_by_pk(pedigree_register: String!): horses
+
+  """
+  fetch data from the table: "races"
+  """
+  races(
+    """distinct select on columns"""
+    distinct_on: [races_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [races_order_by!]
+
+    """filter the rows returned"""
+    where: races_bool_exp
+  ): [races!]!
+
+  """fetch data from the table: "races" using primary key columns"""
+  races_by_pk(race_key: String!): races
+
+  """
+  fetch data from the table: "realtimehorses"
+  """
+  realtimehorses(
+    """distinct select on columns"""
+    distinct_on: [realtimehorses_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [realtimehorses_order_by!]
+
+    """filter the rows returned"""
+    where: realtimehorses_bool_exp
+  ): [realtimehorses!]!
+
+  """fetch data from the table: "realtimehorses" using primary key columns"""
+  realtimehorses_by_pk(realtimehorse_id: String!): realtimehorses
+
+  """
+  fetch data from the table: "rotation_result"
+  """
+  rotation_result(
+    """distinct select on columns"""
+    distinct_on: [rotation_result_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [rotation_result_order_by!]
+
+    """filter the rows returned"""
+    where: rotation_result_bool_exp
+  ): [rotation_result!]!
+
+  """fetch data from the table: "rotation_result" using primary key columns"""
+  rotation_result_by_pk(common_race_name: String!): rotation_result
+
+  """
+  fetch data from the table: "running_horses"
+  """
+  running_horses(
+    """distinct select on columns"""
+    distinct_on: [running_horses_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [running_horses_order_by!]
+
+    """filter the rows returned"""
+    where: running_horses_bool_exp
+  ): [running_horses!]!
+
+  """fetch data from the table: "running_horses" using primary key columns"""
+  running_horses_by_pk(race_key: String!): running_horses
+
+  """
+  execute function "search_race_horse_num_count" which returns "horse_num_count"
+  """
+  search_race_horse_num_count(
+    """
+    input parameters for function "search_race_horse_num_count"
+    """
+    args: search_race_horse_num_count_args!
+
+    """distinct select on columns"""
+    distinct_on: [horse_num_count_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [horse_num_count_order_by!]
+
+    """filter the rows returned"""
+    where: horse_num_count_bool_exp
+  ): [horse_num_count!]!
+
+  """
+  execute function "search_rotation_count" which returns "rotation_result"
+  """
+  search_rotation_count(
+    """
+    input parameters for function "search_rotation_count"
+    """
+    args: search_rotation_count_args!
+
+    """distinct select on columns"""
+    distinct_on: [rotation_result_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [rotation_result_order_by!]
+
+    """filter the rows returned"""
+    where: rotation_result_bool_exp
+  ): [rotation_result!]!
+
+  """
+  execute function "search_running_horses" which returns "running_horses"
+  """
+  search_running_horses(
+    """
+    input parameters for function "search_running_horses"
+    """
+    args: search_running_horses_args!
+
+    """distinct select on columns"""
+    distinct_on: [running_horses_select_column!]
+
+    """limit the number of rows returned"""
+    limit: Int
+
+    """skip the first n rows. Use only with order_by"""
+    offset: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [running_horses_order_by!]
+
+    """filter the rows returned"""
+    where: running_horses_bool_exp
+  ): [running_horses!]!
+}
+
+scalar timestamptz
+
+"""
+expression to compare columns of type timestamptz. All fields are combined with logical 'AND'.
+"""
+input timestamptz_comparison_exp {
+  _eq: timestamptz
+  _gt: timestamptz
+  _gte: timestamptz
+  _in: [timestamptz!]
+  _is_null: Boolean
+  _lt: timestamptz
+  _lte: timestamptz
+  _neq: timestamptz
+  _nin: [timestamptz!]
+}
+
+scalar uuid
+
+"""
+expression to compare columns of type uuid. All fields are combined with logical 'AND'.
+"""
+input uuid_comparison_exp {
+  _eq: uuid
+  _gt: uuid
+  _gte: uuid
+  _in: [uuid!]
+  _is_null: Boolean
+  _lt: uuid
+  _lte: uuid
+  _neq: uuid
+  _nin: [uuid!]
+}
+
