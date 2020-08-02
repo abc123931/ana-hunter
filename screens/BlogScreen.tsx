@@ -4,19 +4,15 @@ import { Header } from "../components/Header";
 import { BlogList } from "../components/Blog";
 import { TabScreenSafeAreaViewStyle } from "../styles";
 
-type RecieveProps = {};
-type ContainerCreatedProps = {};
-type Props = Omit<RecieveProps & ContainerCreatedProps, "">;
+function Component() {
+  return (
+    <SafeAreaView style={TabScreenSafeAreaViewStyle.container}>
+      <Header />
+      <BlogList />
+    </SafeAreaView>
+  );
+}
 
-const Component: React.FC<Props> = ({ ..._props }) => (
-  <SafeAreaView style={TabScreenSafeAreaViewStyle.container}>
-    <Header />
-    <BlogList />
-  </SafeAreaView>
-);
-
-const Container: React.FC<RecieveProps> = ({ ...props }) => {
+export function BlogScreen({ ...props }) {
   return <Component {...props} />;
-};
-
-export default Container;
+}

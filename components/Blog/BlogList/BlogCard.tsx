@@ -6,24 +6,6 @@ import { useNavigation } from "@react-navigation/native";
 import { BlogStackParamList } from "../../../navigation/types";
 import { StackNavigationProp } from "@react-navigation/stack";
 
-type RecieveProps = {
-  blog: GetBlogsQuery["blogs"][number];
-};
-type ContainerCreatedProps = {
-  onPress: (uri: string) => void;
-};
-type Props = Omit<RecieveProps & ContainerCreatedProps, "">;
-
-const Component: React.FC<Props> = ({ blog, onPress, ..._props }) => (
-  <TouchableOpacity style={styles.container} onPress={() => onPress(blog.url)}>
-    <View style={styles.titleBlogerName}>
-      <Text style={styles.title}>{blog.title}</Text>
-      <Text style={styles.blogerName}>穴ハンター</Text>
-    </View>
-    <Image style={styles.image} source={{ uri: blog.image ?? defaultImage }} />
-  </TouchableOpacity>
-);
-
 const styles = StyleSheet.create({
   container: {
     display: "flex",
@@ -51,7 +33,27 @@ const styles = StyleSheet.create({
   },
 });
 
-export const BlogCard: React.FC<RecieveProps> = ({ ...props }) => {
+type RecieveProps = {
+  blog: GetBlogsQuery["blogs"][number];
+};
+type ContainerCreatedProps = {
+  onPress: (uri: string) => void;
+};
+type Props = Omit<RecieveProps & ContainerCreatedProps, "">;
+
+function Component({ blog, onPress, ..._props }: Props) {
+  return (
+    <TouchableOpacity style={styles.container} onPress={() => onPress(blog.url)}>
+      <View style={styles.titleBlogerName}>
+        <Text style={styles.title}>{blog.title}</Text>
+        <Text style={styles.blogerName}>穴ハンター</Text>
+      </View>
+      <Image style={styles.image} source={{ uri: blog.image ?? defaultImage }} />
+    </TouchableOpacity>
+  );
+}
+
+export function BlogCard({ ...props }: RecieveProps) {
   const navigation = useNavigation<StackNavigationProp<BlogStackParamList, "BlogWeb">>();
   const onPress = useCallback(
     (uri: string) => {
@@ -60,4 +62,4 @@ export const BlogCard: React.FC<RecieveProps> = ({ ...props }) => {
     [navigation]
   );
   return <Component onPress={onPress} {...props} />;
-};
+}
