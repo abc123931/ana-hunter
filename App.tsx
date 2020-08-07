@@ -1,33 +1,20 @@
 import React from "react";
 import { RecoilRoot } from "recoil";
-import { ApolloClient, HttpLink, InMemoryCache, ApolloProvider } from "@apollo/client";
+import { RelayEnvironmentProvider } from "react-relay/hooks";
 import AppNavigator from "./navigation/AppNavigator";
 
 import dayjs from "dayjs";
 import "dayjs/locale/ja";
+import { useEnvironment } from "./lib/relay";
 dayjs.locale("ja");
 
-function createApolloClient(initialState = {}) {
-  const cache = new InMemoryCache().restore(initialState);
-  const link = new HttpLink({
-    uri: process.env.HASURA_URL_GRAPHQL,
-    fetch,
-  });
-
-  return new ApolloClient({
-    cache,
-    link,
-  });
+export default function App() {
+  const environment = useEnvironment();
+  return (
+    <RelayEnvironmentProvider environment={environment}>
+      <RecoilRoot>
+        <AppNavigator />
+      </RecoilRoot>
+    </RelayEnvironmentProvider>
+  );
 }
-
-const client = createApolloClient();
-
-const App = () => (
-  <ApolloProvider client={client}>
-    <RecoilRoot>
-      <AppNavigator />
-    </RecoilRoot>
-  </ApolloProvider>
-);
-
-export default App;

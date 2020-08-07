@@ -1,4 +1,4 @@
-import HomeScreen from "./HomeScreen";
+import { HomeScreen } from "./HomeScreen";
 import { BlogScreen } from "./BlogScreen";
 import SearchHorseScreen from "./SearchHorseScreen";
 import SearchRaceScreen from "./SearchRaceScreen";

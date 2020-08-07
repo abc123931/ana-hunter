@@ -23,10 +23,10 @@ input bigint_comparison_exp {
 """
 columns and relationships of "blogs"
 """
-type blogs {
+type blogs implements Node {
   author: String
   createdAt: timestamptz!
-  id: uuid!
+  id: ID!
   image: String
   summary: String
   title: String!
@@ -102,6 +102,19 @@ enum blogs_select_column {
 }
 
 """
+A Relay Connection object on "blogs"
+"""
+type blogsConnection {
+  edges: [blogsEdge!]!
+  pageInfo: PageInfo!
+}
+
+type blogsEdge {
+  cursor: String!
+  node: blogs!
+}
+
+"""
 expression to compare columns of type Float. All fields are combined with logical 'AND'.
 """
 input Float_comparison_exp {
@@ -123,10 +136,11 @@ input Float_comparison_exp {
 columns and relationships of "horse_num_count"
 
 """
-type horse_num_count {
+type horse_num_count implements Node {
   common_race_name: String!
   first_count: bigint!
   horse_num: Int!
+  id: ID!
   out_count: bigint!
   second_count: bigint!
   third_count: bigint!
@@ -196,9 +210,22 @@ enum horse_num_count_select_column {
 }
 
 """
+A Relay Connection object on "horse_num_count"
+"""
+type horse_num_countConnection {
+  edges: [horse_num_countEdge!]!
+  pageInfo: PageInfo!
+}
+
+type horse_num_countEdge {
+  cursor: String!
+  node: horse_num_count!
+}
+
+"""
 columns and relationships of "horses"
 """
-type horses {
+type horses implements Node {
   birthday: String
   coat_color_code: Int
   data_date: String
@@ -207,6 +234,7 @@ type horses {
   father_lineage_code: Int
   horse_name: String
   horse_sign_code: Int
+  id: ID!
   mother_birthday: String
   mother_father_birthday: String
   mother_father_horse_name: String
@@ -349,6 +377,19 @@ enum horses_select_column {
 }
 
 """
+A Relay Connection object on "horses"
+"""
+type horsesConnection {
+  edges: [horsesEdge!]!
+  pageInfo: PageInfo!
+}
+
+type horsesEdge {
+  cursor: String!
+  node: horses!
+}
+
+"""
 expression to compare columns of type Int. All fields are combined with logical 'AND'.
 """
 input Int_comparison_exp {
@@ -361,6 +402,12 @@ input Int_comparison_exp {
   _lte: Int
   _neq: Int
   _nin: [Int!]
+}
+
+"""An object with globally unique ID"""
+interface Node {
+  """A globally unique identifier"""
+  id: ID!
 }
 
 """column ordering options"""
@@ -384,173 +431,156 @@ enum order_by {
   desc_nulls_last
 }
 
+type PageInfo {
+  endCursor: String!
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String!
+}
+
 """query root"""
 type query_root {
-  """fetch data from the table: "blogs" using primary key columns"""
-  blog(id: uuid!): blogs
-
   """
   fetch data from the table: "blogs"
   """
-  blogs(
+  blogs_connection(
+    after: String
+    before: String
+
     """distinct select on columns"""
     distinct_on: [blogs_select_column!]
-
-    """limit the number of rows returned"""
-    limit: Int
-
-    """skip the first n rows. Use only with order_by"""
-    offset: Int
+    first: Int
+    last: Int
 
     """sort the rows by one or more columns"""
     order_by: [blogs_order_by!]
 
     """filter the rows returned"""
     where: blogs_bool_exp
-  ): [blogs!]!
+  ): blogsConnection!
 
   """
   fetch data from the table: "horse_num_count"
   """
-  horse_num_count(
+  horse_num_count_connection(
+    after: String
+    before: String
+
     """distinct select on columns"""
     distinct_on: [horse_num_count_select_column!]
-
-    """limit the number of rows returned"""
-    limit: Int
-
-    """skip the first n rows. Use only with order_by"""
-    offset: Int
+    first: Int
+    last: Int
 
     """sort the rows by one or more columns"""
     order_by: [horse_num_count_order_by!]
 
     """filter the rows returned"""
     where: horse_num_count_bool_exp
-  ): [horse_num_count!]!
-
-  """fetch data from the table: "horse_num_count" using primary key columns"""
-  horse_num_count_by_pk(common_race_name: String!): horse_num_count
+  ): horse_num_countConnection!
 
   """
   fetch data from the table: "horses"
   """
-  horses(
+  horses_connection(
+    after: String
+    before: String
+
     """distinct select on columns"""
     distinct_on: [horses_select_column!]
-
-    """limit the number of rows returned"""
-    limit: Int
-
-    """skip the first n rows. Use only with order_by"""
-    offset: Int
+    first: Int
+    last: Int
 
     """sort the rows by one or more columns"""
     order_by: [horses_order_by!]
 
     """filter the rows returned"""
     where: horses_bool_exp
-  ): [horses!]!
-
-  """fetch data from the table: "horses" using primary key columns"""
-  horses_by_pk(pedigree_register: String!): horses
+  ): horsesConnection!
+  node(
+    """A globally unique id"""
+    id: ID!
+  ): Node
 
   """
   fetch data from the table: "races"
   """
-  races(
+  races_connection(
+    after: String
+    before: String
+
     """distinct select on columns"""
     distinct_on: [races_select_column!]
-
-    """limit the number of rows returned"""
-    limit: Int
-
-    """skip the first n rows. Use only with order_by"""
-    offset: Int
+    first: Int
+    last: Int
 
     """sort the rows by one or more columns"""
     order_by: [races_order_by!]
 
     """filter the rows returned"""
     where: races_bool_exp
-  ): [races!]!
-
-  """fetch data from the table: "races" using primary key columns"""
-  races_by_pk(race_key: String!): races
+  ): racesConnection!
 
   """
   fetch data from the table: "realtimehorses"
   """
-  realtimehorses(
+  realtimehorses_connection(
+    after: String
+    before: String
+
     """distinct select on columns"""
     distinct_on: [realtimehorses_select_column!]
-
-    """limit the number of rows returned"""
-    limit: Int
-
-    """skip the first n rows. Use only with order_by"""
-    offset: Int
+    first: Int
+    last: Int
 
     """sort the rows by one or more columns"""
     order_by: [realtimehorses_order_by!]
 
     """filter the rows returned"""
     where: realtimehorses_bool_exp
-  ): [realtimehorses!]!
-
-  """fetch data from the table: "realtimehorses" using primary key columns"""
-  realtimehorses_by_pk(realtimehorse_id: String!): realtimehorses
+  ): realtimehorsesConnection!
 
   """
   fetch data from the table: "rotation_result"
   """
-  rotation_result(
+  rotation_result_connection(
+    after: String
+    before: String
+
     """distinct select on columns"""
     distinct_on: [rotation_result_select_column!]
-
-    """limit the number of rows returned"""
-    limit: Int
-
-    """skip the first n rows. Use only with order_by"""
-    offset: Int
+    first: Int
+    last: Int
 
     """sort the rows by one or more columns"""
     order_by: [rotation_result_order_by!]
 
     """filter the rows returned"""
     where: rotation_result_bool_exp
-  ): [rotation_result!]!
-
-  """fetch data from the table: "rotation_result" using primary key columns"""
-  rotation_result_by_pk(common_race_name: String!): rotation_result
+  ): rotation_resultConnection!
 
   """
   fetch data from the table: "running_horses"
   """
-  running_horses(
+  running_horses_connection(
+    after: String
+    before: String
+
     """distinct select on columns"""
     distinct_on: [running_horses_select_column!]
-
-    """limit the number of rows returned"""
-    limit: Int
-
-    """skip the first n rows. Use only with order_by"""
-    offset: Int
+    first: Int
+    last: Int
 
     """sort the rows by one or more columns"""
     order_by: [running_horses_order_by!]
 
     """filter the rows returned"""
     where: running_horses_bool_exp
-  ): [running_horses!]!
-
-  """fetch data from the table: "running_horses" using primary key columns"""
-  running_horses_by_pk(race_key: String!): running_horses
+  ): running_horsesConnection!
 
   """
   execute function "search_race_horse_num_count" which returns "horse_num_count"
   """
-  search_race_horse_num_count(
+  search_race_horse_num_count_connection(
     """
     input parameters for function "search_race_horse_num_count"
     """
@@ -570,12 +600,12 @@ type query_root {
 
     """filter the rows returned"""
     where: horse_num_count_bool_exp
-  ): [horse_num_count!]!
+  ): horse_num_countConnection!
 
   """
   execute function "search_rotation_count" which returns "rotation_result"
   """
-  search_rotation_count(
+  search_rotation_count_connection(
     """
     input parameters for function "search_rotation_count"
     """
@@ -595,12 +625,12 @@ type query_root {
 
     """filter the rows returned"""
     where: rotation_result_bool_exp
-  ): [rotation_result!]!
+  ): rotation_resultConnection!
 
   """
   execute function "search_running_horses" which returns "running_horses"
   """
-  search_running_horses(
+  search_running_horses_connection(
     """
     input parameters for function "search_running_horses"
     """
@@ -620,13 +650,13 @@ type query_root {
 
     """filter the rows returned"""
     where: running_horses_bool_exp
-  ): [running_horses!]!
+  ): running_horsesConnection!
 }
 
 """
 columns and relationships of "races"
 """
-type races {
+type races implements Node {
   course: String
   data_partition: String
   distance: Int
@@ -637,6 +667,7 @@ type races {
   head_count: Int
   holding_key: String
   holding_partition: String
+  id: ID!
   in_out: Int
   place_code: Int
   race_condition: String
@@ -669,6 +700,23 @@ type races {
     """filter the rows returned"""
     where: realtimehorses_bool_exp
   ): [realtimehorses!]!
+
+  """An array relationship connection"""
+  realtimehorses_connection(
+    after: String
+    before: String
+
+    """distinct select on columns"""
+    distinct_on: [realtimehorses_select_column!]
+    first: Int
+    last: Int
+
+    """sort the rows by one or more columns"""
+    order_by: [realtimehorses_order_by!]
+
+    """filter the rows returned"""
+    where: realtimehorses_bool_exp
+  ): realtimehorsesConnection!
   right_left: Int
   second_budget_cash_prize: Int
   second_prize: Int
@@ -850,9 +898,22 @@ enum races_select_column {
 }
 
 """
+A Relay Connection object on "races"
+"""
+type racesConnection {
+  edges: [racesEdge!]!
+  pageInfo: PageInfo!
+}
+
+type racesEdge {
+  cursor: String!
+  node: races!
+}
+
+"""
 columns and relationships of "realtimehorses"
 """
-type realtimehorses {
+type realtimehorses implements Node {
   after_three_f_diff: Int
   after_three_f_in_out: Int
   after_three_f_rank: Int
@@ -890,6 +951,7 @@ type realtimehorses {
   horse_special_mention_three: String
   horse_special_mention_two: String
   horse_start_index: Float
+  id: ID!
   idm: Float
   idm_sign: Int
   in_out_way: Int
@@ -1531,15 +1593,29 @@ enum realtimehorses_select_column {
 }
 
 """
+A Relay Connection object on "realtimehorses"
+"""
+type realtimehorsesConnection {
+  edges: [realtimehorsesEdge!]!
+  pageInfo: PageInfo!
+}
+
+type realtimehorsesEdge {
+  cursor: String!
+  node: realtimehorses!
+}
+
+"""
 ローテーションviewのリザルトテーブル
 
 
 columns and relationships of "rotation_result"
 
 """
-type rotation_result {
+type rotation_result implements Node {
   common_race_name: String!
   first_count: bigint!
+  id: ID!
   lag_common_race_name: String!
   out_count: bigint!
   second_count: bigint!
@@ -1610,12 +1686,26 @@ enum rotation_result_select_column {
 }
 
 """
+A Relay Connection object on "rotation_result"
+"""
+type rotation_resultConnection {
+  edges: [rotation_resultEdge!]!
+  pageInfo: PageInfo!
+}
+
+type rotation_resultEdge {
+  cursor: String!
+  node: rotation_result!
+}
+
+"""
 columns and relationships of "running_horses"
 """
-type running_horses {
+type running_horses implements Node {
   common_race_name: String!
   horse_name: String!
   horse_num: Int!
+  id: ID!
   new_total_index: Int!
   popularity: Int!
   race_key: String!
@@ -1678,6 +1768,19 @@ enum running_horses_select_column {
   race_key
 }
 
+"""
+A Relay Connection object on "running_horses"
+"""
+type running_horsesConnection {
+  edges: [running_horsesEdge!]!
+  pageInfo: PageInfo!
+}
+
+type running_horsesEdge {
+  cursor: String!
+  node: running_horses!
+}
+
 input search_race_horse_num_count_args {
   argname: String
 }
@@ -1714,171 +1817,147 @@ input String_comparison_exp {
 
 """subscription root"""
 type subscription_root {
-  """fetch data from the table: "blogs" using primary key columns"""
-  blog(id: uuid!): blogs
-
   """
   fetch data from the table: "blogs"
   """
-  blogs(
+  blogs_connection(
+    after: String
+    before: String
+
     """distinct select on columns"""
     distinct_on: [blogs_select_column!]
-
-    """limit the number of rows returned"""
-    limit: Int
-
-    """skip the first n rows. Use only with order_by"""
-    offset: Int
+    first: Int
+    last: Int
 
     """sort the rows by one or more columns"""
     order_by: [blogs_order_by!]
 
     """filter the rows returned"""
     where: blogs_bool_exp
-  ): [blogs!]!
+  ): blogsConnection!
 
   """
   fetch data from the table: "horse_num_count"
   """
-  horse_num_count(
+  horse_num_count_connection(
+    after: String
+    before: String
+
     """distinct select on columns"""
     distinct_on: [horse_num_count_select_column!]
-
-    """limit the number of rows returned"""
-    limit: Int
-
-    """skip the first n rows. Use only with order_by"""
-    offset: Int
+    first: Int
+    last: Int
 
     """sort the rows by one or more columns"""
     order_by: [horse_num_count_order_by!]
 
     """filter the rows returned"""
     where: horse_num_count_bool_exp
-  ): [horse_num_count!]!
-
-  """fetch data from the table: "horse_num_count" using primary key columns"""
-  horse_num_count_by_pk(common_race_name: String!): horse_num_count
+  ): horse_num_countConnection!
 
   """
   fetch data from the table: "horses"
   """
-  horses(
+  horses_connection(
+    after: String
+    before: String
+
     """distinct select on columns"""
     distinct_on: [horses_select_column!]
-
-    """limit the number of rows returned"""
-    limit: Int
-
-    """skip the first n rows. Use only with order_by"""
-    offset: Int
+    first: Int
+    last: Int
 
     """sort the rows by one or more columns"""
     order_by: [horses_order_by!]
 
     """filter the rows returned"""
     where: horses_bool_exp
-  ): [horses!]!
-
-  """fetch data from the table: "horses" using primary key columns"""
-  horses_by_pk(pedigree_register: String!): horses
+  ): horsesConnection!
+  node(
+    """A globally unique id"""
+    id: ID!
+  ): Node
 
   """
   fetch data from the table: "races"
   """
-  races(
+  races_connection(
+    after: String
+    before: String
+
     """distinct select on columns"""
     distinct_on: [races_select_column!]
-
-    """limit the number of rows returned"""
-    limit: Int
-
-    """skip the first n rows. Use only with order_by"""
-    offset: Int
+    first: Int
+    last: Int
 
     """sort the rows by one or more columns"""
     order_by: [races_order_by!]
 
     """filter the rows returned"""
     where: races_bool_exp
-  ): [races!]!
-
-  """fetch data from the table: "races" using primary key columns"""
-  races_by_pk(race_key: String!): races
+  ): racesConnection!
 
   """
   fetch data from the table: "realtimehorses"
   """
-  realtimehorses(
+  realtimehorses_connection(
+    after: String
+    before: String
+
     """distinct select on columns"""
     distinct_on: [realtimehorses_select_column!]
-
-    """limit the number of rows returned"""
-    limit: Int
-
-    """skip the first n rows. Use only with order_by"""
-    offset: Int
+    first: Int
+    last: Int
 
     """sort the rows by one or more columns"""
     order_by: [realtimehorses_order_by!]
 
     """filter the rows returned"""
     where: realtimehorses_bool_exp
-  ): [realtimehorses!]!
-
-  """fetch data from the table: "realtimehorses" using primary key columns"""
-  realtimehorses_by_pk(realtimehorse_id: String!): realtimehorses
+  ): realtimehorsesConnection!
 
   """
   fetch data from the table: "rotation_result"
   """
-  rotation_result(
+  rotation_result_connection(
+    after: String
+    before: String
+
     """distinct select on columns"""
     distinct_on: [rotation_result_select_column!]
-
-    """limit the number of rows returned"""
-    limit: Int
-
-    """skip the first n rows. Use only with order_by"""
-    offset: Int
+    first: Int
+    last: Int
 
     """sort the rows by one or more columns"""
     order_by: [rotation_result_order_by!]
 
     """filter the rows returned"""
     where: rotation_result_bool_exp
-  ): [rotation_result!]!
-
-  """fetch data from the table: "rotation_result" using primary key columns"""
-  rotation_result_by_pk(common_race_name: String!): rotation_result
+  ): rotation_resultConnection!
 
   """
   fetch data from the table: "running_horses"
   """
-  running_horses(
+  running_horses_connection(
+    after: String
+    before: String
+
     """distinct select on columns"""
     distinct_on: [running_horses_select_column!]
-
-    """limit the number of rows returned"""
-    limit: Int
-
-    """skip the first n rows. Use only with order_by"""
-    offset: Int
+    first: Int
+    last: Int
 
     """sort the rows by one or more columns"""
     order_by: [running_horses_order_by!]
 
     """filter the rows returned"""
     where: running_horses_bool_exp
-  ): [running_horses!]!
-
-  """fetch data from the table: "running_horses" using primary key columns"""
-  running_horses_by_pk(race_key: String!): running_horses
+  ): running_horsesConnection!
 
   """
   execute function "search_race_horse_num_count" which returns "horse_num_count"
   """
-  search_race_horse_num_count(
+  search_race_horse_num_count_connection(
     """
     input parameters for function "search_race_horse_num_count"
     """
@@ -1898,12 +1977,12 @@ type subscription_root {
 
     """filter the rows returned"""
     where: horse_num_count_bool_exp
-  ): [horse_num_count!]!
+  ): horse_num_countConnection!
 
   """
   execute function "search_rotation_count" which returns "rotation_result"
   """
-  search_rotation_count(
+  search_rotation_count_connection(
     """
     input parameters for function "search_rotation_count"
     """
@@ -1923,12 +2002,12 @@ type subscription_root {
 
     """filter the rows returned"""
     where: rotation_result_bool_exp
-  ): [rotation_result!]!
+  ): rotation_resultConnection!
 
   """
   execute function "search_running_horses" which returns "running_horses"
   """
-  search_running_horses(
+  search_running_horses_connection(
     """
     input parameters for function "search_running_horses"
     """
@@ -1948,7 +2027,7 @@ type subscription_root {
 
     """filter the rows returned"""
     where: running_horses_bool_exp
-  ): [running_horses!]!
+  ): running_horsesConnection!
 }
 
 scalar timestamptz

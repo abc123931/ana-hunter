@@ -1,11 +1,11 @@
 import React, { useCallback } from "react";
 import { StyleSheet, View, Text, Image, TouchableOpacity } from "react-native";
 import { FontAwesome5 } from "@expo/vector-icons";
-import { GetWeekendRacesQuery } from "../../../../apollo/graphql";
-import { DUMMY_IMAGE } from "../../../constants";
+import { GetWeekendRacesQuery } from "../../../apollo/graphql";
+import { DUMMY_IMAGE } from "../../constants";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
-import { HomeStackParamList } from "../../../../navigation/types";
+import { HomeStackParamList } from "../../../navigation/types";
 
 type RecieveProps = {
   data: GetWeekendRacesQuery["races"][number];

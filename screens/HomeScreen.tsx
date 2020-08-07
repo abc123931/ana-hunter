@@ -1,22 +1,24 @@
 import React from "react";
-import { SafeAreaView } from "react-native";
+import { Text, SafeAreaView } from "react-native";
 import { Header } from "../components/Header";
-import { RaceList } from "../components/Home";
+import { RaceList } from "../components/Home/RaceList";
+import { HomeRaceCardLoading } from "../components/Loading";
 import { TabScreenSafeAreaViewStyle } from "../styles";
+import { ErrorBoundary } from "../components/Boundary/boundary";
 
-type RecieveProps = {};
-type ContainerCreatedProps = {};
-type Props = Omit<RecieveProps & ContainerCreatedProps, "">;
+function Component() {
+  return (
+    <SafeAreaView style={TabScreenSafeAreaViewStyle.container}>
+      <Header />
+      <ErrorBoundary fallback={<Text>エラーが発生しました。</Text>}>
+        <React.Suspense fallback={<HomeRaceCardLoading />}>
+          <RaceList />
+        </React.Suspense>
+      </ErrorBoundary>
+    </SafeAreaView>
+  );
+}
 
-const Component: React.FC<Props> = ({ ..._props }) => (
-  <SafeAreaView style={TabScreenSafeAreaViewStyle.container}>
-    <Header />
-    <RaceList />
-  </SafeAreaView>
-);
-
-const Container: React.FC<RecieveProps> = ({ ...props }) => {
-  return <Component {...props} />;
-};
-
-export default Container;
+export function HomeScreen() {
+  return <Component />;
+}

@@ -10,7 +10,7 @@
     "codegen": "graphql-codegen --config ./apollo/codegen.js && yarn lint:graphql",
     "lint:graphql": "eslint ./apollo/graphql.tsx --fix",
     "relay": "relay-compiler",
-    "schema": "get-graphql-schema https://api.ana-hunter.dev/v1/graphql > schema/schema.graphql"
+    "schema": "get-graphql-schema https://api.ana-hunter.dev/v1beta1/relay > schema/schema.graphql"
   },
   "prettier": {
     "printWidth": 120,
