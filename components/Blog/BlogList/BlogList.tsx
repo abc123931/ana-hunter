@@ -16,8 +16,6 @@ type ContainerCreatedProps = {
 };
 type Props = Omit<ContainerCreatedProps, "">;
 
-const LIMIT = 10;
-
 const query = graphql`
   query BlogList_Query {
     ...BlogList_blogs
@@ -33,9 +31,9 @@ function Component({ blogs, loadNext, hasNext, refreshing, onRefresh, ..._props 
       renderItem={({ item }) => <BlogCard blog={item.node} />}
       keyExtractor={(_item, index) => `${index}`}
       onEndReached={() => {
-        if (hasNext) loadNext(LIMIT);
+        if (hasNext) loadNext(10);
       }}
-      onEndReachedThreshold={0}
+      onEndReachedThreshold={3}
     />
   );
 }
@@ -47,7 +45,7 @@ export function BlogList({ ...props }) {
   const { data, loadNext, hasNext } = usePaginationFragment<BlogsPaginationQuery, BlogList_blogs$key>(
     graphql`
       fragment BlogList_blogs on query_root
-        @argumentDefinitions(first: { type: "Int", defaultValue: LIMIT }, after: { type: "String" })
+        @argumentDefinitions(first: { type: "Int", defaultValue: 10 }, after: { type: "String" })
         @refetchable(queryName: "BlogsPaginationQuery") {
         blogs_connection(first: $first, after: $after, order_by: { updatedAt: desc })
           @connection(key: "Query_blogs_connection") {

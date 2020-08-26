@@ -26,7 +26,7 @@ fragment BlogCard_blog on blogs {
 }
 
 fragment BlogList_blogs on query_root {
-  blogs_connection(first: 1, order_by: {updatedAt: desc}) {
+  blogs_connection(first: 10, order_by: {updatedAt: desc}) {
     edges {
       node {
         ...BlogCard_blog
@@ -48,7 +48,7 @@ var v0 = [
   {
     "kind": "Literal",
     "name": "first",
-    "value": 1
+    "value": 10
   },
   {
     "kind": "Literal",
@@ -178,7 +178,7 @@ return {
             "storageKey": null
           }
         ],
-        "storageKey": "blogs_connection(first:1,order_by:{\"updatedAt\":\"desc\"})"
+        "storageKey": "blogs_connection(first:10,order_by:{\"updatedAt\":\"desc\"})"
       },
       {
         "alias": null,
@@ -194,12 +194,12 @@ return {
     ]
   },
   "params": {
-    "cacheID": "7ffd8d05a62a574e63a4680b767b5c95",
+    "cacheID": "6d3229121dd2471059b728a88fec6a5b",
     "id": null,
     "metadata": {},
     "name": "BlogList_Query",
     "operationKind": "query",
-    "text": "query BlogList_Query {\n  ...BlogList_blogs\n}\n\nfragment BlogCard_blog on blogs {\n  url\n  image\n  title\n}\n\nfragment BlogList_blogs on query_root {\n  blogs_connection(first: 1, order_by: {updatedAt: desc}) {\n    edges {\n      node {\n        ...BlogCard_blog\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n"
+    "text": "query BlogList_Query {\n  ...BlogList_blogs\n}\n\nfragment BlogCard_blog on blogs {\n  url\n  image\n  title\n}\n\nfragment BlogList_blogs on query_root {\n  blogs_connection(first: 10, order_by: {updatedAt: desc}) {\n    edges {\n      node {\n        ...BlogCard_blog\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n"
   }
 };
 })();

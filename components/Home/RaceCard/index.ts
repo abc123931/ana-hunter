@@ -1,3 +1,3 @@
-import RaceCard from "./RaceCard";
+import { RaceCard } from "./RaceCard";
 
 export { RaceCard };

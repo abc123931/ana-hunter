@@ -3,27 +3,27 @@
 
 import { ReaderFragment } from "relay-runtime";
 import { FragmentRefs } from "relay-runtime";
-export type BlogList_blogs = {
-    readonly blogs_connection: {
+export type RaceList_races = {
+    readonly races_connection: {
         readonly edges: ReadonlyArray<{
             readonly node: {
-                readonly " $fragmentRefs": FragmentRefs<"BlogCard_blog">;
+                readonly " $fragmentRefs": FragmentRefs<"RaceCard_race">;
             };
         }>;
     };
-    readonly " $refType": "BlogList_blogs";
+    readonly " $refType": "RaceList_races";
 };
-export type BlogList_blogs$data = BlogList_blogs;
-export type BlogList_blogs$key = {
-    readonly " $data"?: BlogList_blogs$data;
-    readonly " $fragmentRefs": FragmentRefs<"BlogList_blogs">;
+export type RaceList_races$data = RaceList_races;
+export type RaceList_races$key = {
+    readonly " $data"?: RaceList_races$data;
+    readonly " $fragmentRefs": FragmentRefs<"RaceList_races">;
 };
 
 
 
 const node: ReaderFragment = (function(){
 var v0 = [
-  "blogs_connection"
+  "races_connection"
 ];
 return {
   "argumentDefinitions": [
@@ -33,7 +33,7 @@ return {
       "name": "after"
     },
     {
-      "defaultValue": 10,
+      "defaultValue": 1,
       "kind": "LocalArgument",
       "name": "first"
     }
@@ -58,31 +58,47 @@ return {
         "path": (v0/*: any*/)
       },
       "fragmentPathInResult": [],
-      "operation": require('./BlogsPaginationQuery.graphql.ts')
+      "operation": require('./RacesPaginationQuery.graphql.ts')
     }
   },
-  "name": "BlogList_blogs",
+  "name": "RaceList_races",
   "selections": [
     {
-      "alias": "blogs_connection",
+      "alias": "races_connection",
       "args": [
         {
           "kind": "Literal",
           "name": "order_by",
           "value": {
-            "updatedAt": "desc"
+            "race_day": "desc",
+            "race_grade": "asc"
+          }
+        },
+        {
+          "kind": "Literal",
+          "name": "where",
+          "value": {
+            "race_grade": {
+              "_gte": 1,
+              "_lte": 3
+            },
+            "realtimehorses": {
+              "race_key": {
+                "_is_null": false
+              }
+            }
           }
         }
       ],
-      "concreteType": "blogsConnection",
+      "concreteType": "racesConnection",
       "kind": "LinkedField",
-      "name": "__Query_blogs_connection_connection",
+      "name": "__Query_races_connection_connection",
       "plural": false,
       "selections": [
         {
           "alias": null,
           "args": null,
-          "concreteType": "blogsEdge",
+          "concreteType": "racesEdge",
           "kind": "LinkedField",
           "name": "edges",
           "plural": true,
@@ -90,7 +106,7 @@ return {
             {
               "alias": null,
               "args": null,
-              "concreteType": "blogs",
+              "concreteType": "races",
               "kind": "LinkedField",
               "name": "node",
               "plural": false,
@@ -105,7 +121,7 @@ return {
                 {
                   "args": null,
                   "kind": "FragmentSpread",
-                  "name": "BlogCard_blog"
+                  "name": "RaceCard_race"
                 }
               ],
               "storageKey": null
@@ -146,12 +162,12 @@ return {
           "storageKey": null
         }
       ],
-      "storageKey": "__Query_blogs_connection_connection(order_by:{\"updatedAt\":\"desc\"})"
+      "storageKey": "__Query_races_connection_connection(order_by:{\"race_day\":\"desc\",\"race_grade\":\"asc\"},where:{\"race_grade\":{\"_gte\":1,\"_lte\":3},\"realtimehorses\":{\"race_key\":{\"_is_null\":false}}})"
     }
   ],
   "type": "query_root",
   "abstractKey": null
 };
 })();
-(node as any).hash = '6aa5ecaffca9bce63db10654b7fb6095';
+(node as any).hash = 'bc561cdd62c036685f1d31f88486dd02';
 export default node;

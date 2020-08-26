@@ -3,39 +3,41 @@
 
 import { ConcreteRequest } from "relay-runtime";
 import { FragmentRefs } from "relay-runtime";
-export type BlogsPaginationQueryVariables = {
+export type RacesPaginationQueryVariables = {
     after?: string | null;
     first?: number | null;
 };
-export type BlogsPaginationQueryResponse = {
-    readonly " $fragmentRefs": FragmentRefs<"BlogList_blogs">;
+export type RacesPaginationQueryResponse = {
+    readonly " $fragmentRefs": FragmentRefs<"RaceList_races">;
 };
-export type BlogsPaginationQuery = {
-    readonly response: BlogsPaginationQueryResponse;
-    readonly variables: BlogsPaginationQueryVariables;
+export type RacesPaginationQuery = {
+    readonly response: RacesPaginationQueryResponse;
+    readonly variables: RacesPaginationQueryVariables;
 };
 
 
 
 /*
-query BlogsPaginationQuery(
+query RacesPaginationQuery(
   $after: String
-  $first: Int = 10
+  $first: Int = 1
 ) {
-  ...BlogList_blogs_2HEEH6
+  ...RaceList_races_2HEEH6
 }
 
-fragment BlogCard_blog on blogs {
-  url
-  image
-  title
+fragment RaceCard_race on races {
+  raceKey: race_key
+  raceName: race_name
+  raceNameCommon: race_name_common
+  raceGrade: race_grade
+  raceDay: race_day
 }
 
-fragment BlogList_blogs_2HEEH6 on query_root {
-  blogs_connection(first: $first, after: $after, order_by: {updatedAt: desc}) {
+fragment RaceList_races_2HEEH6 on query_root {
+  races_connection(where: {race_grade: {_gte: 1, _lte: 3}, realtimehorses: {race_key: {_is_null: false}}}, order_by: {race_day: desc, race_grade: asc}, first: $first, after: $after) {
     edges {
       node {
-        ...BlogCard_blog
+        ...RaceCard_race
         id
         __typename
       }
@@ -57,7 +59,7 @@ var v0 = [
     "name": "after"
   },
   {
-    "defaultValue": 10,
+    "defaultValue": 1,
     "kind": "LocalArgument",
     "name": "first"
   }
@@ -79,7 +81,23 @@ v3 = [
     "kind": "Literal",
     "name": "order_by",
     "value": {
-      "updatedAt": "desc"
+      "race_day": "desc",
+      "race_grade": "asc"
+    }
+  },
+  {
+    "kind": "Literal",
+    "name": "where",
+    "value": {
+      "race_grade": {
+        "_gte": 1,
+        "_lte": 3
+      },
+      "realtimehorses": {
+        "race_key": {
+          "_is_null": false
+        }
+      }
     }
   }
 ];
@@ -88,7 +106,7 @@ return {
     "argumentDefinitions": (v0/*: any*/),
     "kind": "Fragment",
     "metadata": null,
-    "name": "BlogsPaginationQuery",
+    "name": "RacesPaginationQuery",
     "selections": [
       {
         "args": [
@@ -96,7 +114,7 @@ return {
           (v2/*: any*/)
         ],
         "kind": "FragmentSpread",
-        "name": "BlogList_blogs"
+        "name": "RaceList_races"
       }
     ],
     "type": "query_root",
@@ -106,20 +124,20 @@ return {
   "operation": {
     "argumentDefinitions": (v0/*: any*/),
     "kind": "Operation",
-    "name": "BlogsPaginationQuery",
+    "name": "RacesPaginationQuery",
     "selections": [
       {
         "alias": null,
         "args": (v3/*: any*/),
-        "concreteType": "blogsConnection",
+        "concreteType": "racesConnection",
         "kind": "LinkedField",
-        "name": "blogs_connection",
+        "name": "races_connection",
         "plural": false,
         "selections": [
           {
             "alias": null,
             "args": null,
-            "concreteType": "blogsEdge",
+            "concreteType": "racesEdge",
             "kind": "LinkedField",
             "name": "edges",
             "plural": true,
@@ -127,30 +145,44 @@ return {
               {
                 "alias": null,
                 "args": null,
-                "concreteType": "blogs",
+                "concreteType": "races",
                 "kind": "LinkedField",
                 "name": "node",
                 "plural": false,
                 "selections": [
                   {
-                    "alias": null,
+                    "alias": "raceKey",
                     "args": null,
                     "kind": "ScalarField",
-                    "name": "url",
+                    "name": "race_key",
                     "storageKey": null
                   },
                   {
-                    "alias": null,
+                    "alias": "raceName",
                     "args": null,
                     "kind": "ScalarField",
-                    "name": "image",
+                    "name": "race_name",
                     "storageKey": null
                   },
                   {
-                    "alias": null,
+                    "alias": "raceNameCommon",
                     "args": null,
                     "kind": "ScalarField",
-                    "name": "title",
+                    "name": "race_name_common",
+                    "storageKey": null
+                  },
+                  {
+                    "alias": "raceGrade",
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "race_grade",
+                    "storageKey": null
+                  },
+                  {
+                    "alias": "raceDay",
+                    "args": null,
+                    "kind": "ScalarField",
+                    "name": "race_day",
                     "storageKey": null
                   },
                   {
@@ -212,24 +244,25 @@ return {
         "alias": null,
         "args": (v3/*: any*/),
         "filters": [
+          "where",
           "order_by"
         ],
         "handle": "connection",
-        "key": "Query_blogs_connection",
+        "key": "Query_races_connection",
         "kind": "LinkedHandle",
-        "name": "blogs_connection"
+        "name": "races_connection"
       }
     ]
   },
   "params": {
-    "cacheID": "edaa664b5393d04bde599a9ef2300453",
+    "cacheID": "83323798309f19a20343f5b46a692935",
     "id": null,
     "metadata": {},
-    "name": "BlogsPaginationQuery",
+    "name": "RacesPaginationQuery",
     "operationKind": "query",
-    "text": "query BlogsPaginationQuery(\n  $after: String\n  $first: Int = 10\n) {\n  ...BlogList_blogs_2HEEH6\n}\n\nfragment BlogCard_blog on blogs {\n  url\n  image\n  title\n}\n\nfragment BlogList_blogs_2HEEH6 on query_root {\n  blogs_connection(first: $first, after: $after, order_by: {updatedAt: desc}) {\n    edges {\n      node {\n        ...BlogCard_blog\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n"
+    "text": "query RacesPaginationQuery(\n  $after: String\n  $first: Int = 1\n) {\n  ...RaceList_races_2HEEH6\n}\n\nfragment RaceCard_race on races {\n  raceKey: race_key\n  raceName: race_name\n  raceNameCommon: race_name_common\n  raceGrade: race_grade\n  raceDay: race_day\n}\n\nfragment RaceList_races_2HEEH6 on query_root {\n  races_connection(where: {race_grade: {_gte: 1, _lte: 3}, realtimehorses: {race_key: {_is_null: false}}}, order_by: {race_day: desc, race_grade: asc}, first: $first, after: $after) {\n    edges {\n      node {\n        ...RaceCard_race\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n"
   }
 };
 })();
-(node as any).hash = '6aa5ecaffca9bce63db10654b7fb6095';
+(node as any).hash = 'bc561cdd62c036685f1d31f88486dd02';
 export default node;
